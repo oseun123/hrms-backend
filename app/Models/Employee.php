@@ -148,4 +148,27 @@ class Employee extends Model
     {
         return $query->where('tenant_id', $tenantId);
     }
+
+    /**
+     * Retrieve the model for a bound value.
+     * This ensures route model binding is scoped to the current tenant.
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        // Get the authenticated user's tenant_id
+        $tenantId = auth()->user() ? auth()->user()->tenant_id : null;
+
+        if (!$tenantId) {
+            return null;
+        }
+
+        // Scope the query to the current tenant
+        return static::where('tenant_id', $tenantId)
+            ->where($field ?? $this->getRouteKeyName(), $value)
+            ->first();
+    }
 }

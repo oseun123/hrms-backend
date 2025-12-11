@@ -557,17 +557,38 @@ curl -X GET "http://localhost:8000/api/hris/employees/1" \
 > [!IMPORTANT]
 > **Automatic User Account Creation**: When you create an employee, a user account is automatically created with a temporary password. The employee can use this to log in to the system.
 
+> [!TIP]
+> **Combined Endpoint**: You can now include `employment_details` in the employee creation request to create both the employee and their employment details in a single API call. This represents the minimum required employee information.
+
 **Required Fields**:
-- `tenant_id` - Tenant ID
 - `employee_number` - Unique employee number
 - `first_name` - Employee's first name
 - `last_name` - Employee's last name
 - **`email`** - Employee's email (must be unique, used for login)
 
-**Body**:
+**Optional Employment Details**:
+You can include an `employment_details` object with any of the following fields:
+- `work_email` - Work email address
+- `department_id` - Department ID
+- `position_id` - Position ID
+- `manager_id` - Manager's employee ID
+- `employment_type` - Type (e.g., full-time, part-time, contract)
+- `employment_status` - Status (e.g., active, on-leave)
+- `hire_date` - Hire date
+- `probation_end_date` - Probation end date
+- `probation_status` - One of: pending, passed, failed, extended
+- `confirmation_date` - Confirmation date
+- `contract_start_date` - Contract start date
+- `contract_end_date` - Contract end date
+- `notice_period_days` - Notice period in days
+- `work_location` - Work location
+- `work_schedule` - Work schedule
+- `shift` - Work shift
+- `remote_work_eligible` - Boolean
+
+**Body (Basic)**:
 ```json
 {
-  "tenant_id": 1,
   "employee_number": "STAFF/2025/002",
   "first_name": "Jane",
   "middle_name": "Marie",
@@ -583,13 +604,46 @@ curl -X GET "http://localhost:8000/api/hris/employees/1" \
 }
 ```
 
-**Example Request**:
+**Body (With Employment Details)**:
+```json
+{
+  "employee_number": "STAFF/2025/002",
+  "first_name": "Jane",
+  "middle_name": "Marie",
+  "last_name": "Smith",
+  "email": "jane.smith@company.com",
+  "date_of_birth": "1992-03-20",
+  "gender": "female",
+  "marital_status": "single",
+  "nationality": "American",
+  "national_id": "123456789",
+  "passport_number": "P1234567",
+  "is_active": true,
+  "employment_details": {
+    "work_email": "jane.smith@company.com",
+    "department_id": 4,
+    "position_id": 1,
+    "manager_id": 2,
+    "employment_type": "full-time",
+    "employment_status": "active",
+    "hire_date": "2025-01-01",
+    "probation_end_date": "2025-04-01",
+    "probation_status": "pending",
+    "notice_period_days": 30,
+    "work_location": "Lagos Office",
+    "work_schedule": "Monday-Friday, 9AM-5PM",
+    "shift": "day",
+    "remote_work_eligible": true
+  }
+}
+```
+
+**Example Request (Basic)**:
 ```bash
 curl -X POST "http://localhost:8000/api/hris/employees" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "tenant_id": 1,
     "employee_number": "STAFF/2025/002",
     "first_name": "Jane",
     "last_name": "Smith",
@@ -601,11 +655,41 @@ curl -X POST "http://localhost:8000/api/hris/employees" \
   }'
 ```
 
-**Example Response**:
+**Example Request (With Employment Details)**:
+```bash
+curl -X POST "http://localhost:8000/api/hris/employees" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "employee_number": "STAFF/2025/003",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@company.com",
+    "date_of_birth": "1990-05-15",
+    "gender": "male",
+    "marital_status": "single",
+    "is_active": true,
+    "employment_details": {
+      "work_email": "john.doe@company.com",
+      "department_id": 4,
+      "position_id": 1,
+      "employment_type": "full-time",
+      "employment_status": "active",
+      "hire_date": "2025-01-01",
+      "probation_end_date": "2025-04-01",
+      "probation_status": "pending",
+      "notice_period_days": 30,
+      "work_location": "Lagos Office",
+      "remote_work_eligible": true
+    }
+  }'
+```
+
+**Example Response (With Employment Details)**:
 ```json
 {
   "success": true,
-  "message": "Employee and user account created successfully",
+  "message": "Employee and user account created successfully. A welcome email has been sent with instructions to set their password.",
   "data": {
     "employee": {
       "id": 2,
@@ -618,16 +702,37 @@ curl -X POST "http://localhost:8000/api/hris/employees" \
         "id": 3,
         "name": "Jane Marie Smith",
         "email": "jane.smith@company.com"
+      },
+      "employment_details": {
+        "id": 1,
+        "employee_id": 2,
+        "work_email": "jane.smith@company.com",
+        "department_id": 4,
+        "position_id": 1,
+        "employment_type": "full-time",
+        "employment_status": "active",
+        "hire_date": "2025-01-01",
+        "department": {
+          "id": 4,
+          "name": "Development"
+        },
+        "position": {
+          "id": 1,
+          "title": "Software Developer"
+        },
+        "manager": {
+          "id": 2,
+          "full_name": "Manager Name"
+        }
       }
-    },
-    "temporary_password": "Temp1234!",
-    "note": "Please share the temporary password with the employee. They should change it on first login."
+    }
   }
 }
 ```
 
 > [!NOTE]
 > The temporary password is returned in the response. Make sure to securely share it with the employee. They will need to change it on first login.
+
 
 ### 4. Update Employee
 **URL**: `PUT /employees/{id}`

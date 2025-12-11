@@ -38,7 +38,13 @@ class WelcomeEmployee extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $loginUrl = config('app.url') . '/login';
+        // Get tenant slug for subdomain URL
+        $tenantSlug = $notifiable->tenant->slug ?? 'app';
+        $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
+
+        // Build tenant-aware login URL: http://{tenant-slug}.localhost:3000/login
+        $loginUrl = str_replace('://', "://{$tenantSlug}.", $frontendUrl) . '/login';
+        $forgotPasswordUrl = str_replace('://', "://{$tenantSlug}.", $frontendUrl) . '/forgot-password';
 
         return (new MailMessage)
             ->subject('Welcome to ' . config('app.name'))
@@ -46,9 +52,10 @@ class WelcomeEmployee extends Notification implements ShouldQueue
             ->line('Welcome to ' . config('app.name') . '! Your employee account has been created.')
             ->line('**Employee Number:** ' . $this->employeeNumber)
             ->line('**Email:** ' . $notifiable->email)
-            ->line('**Temporary Password:** ' . $this->temporaryPassword)
-            ->line('Please use these credentials to log in to the system. You will be required to change your password on first login.')
-            ->action('Login to Portal', $loginUrl)
+            ->line('To access your account, please set your password using the "Forgot Password" feature on the login page.')
+            ->line('Simply click the link below, then use the "Forgot Password" link to receive a password reset email.')
+            ->action('Go to Login Page', $loginUrl)
+            ->line('Or visit: ' . $forgotPasswordUrl)
             ->line('If you have any questions, please contact your HR department.')
             ->line('Thank you for joining our team!');
     }
@@ -58,14 +65,18 @@ class WelcomeEmployee extends Notification implements ShouldQueue
      */
     public function toArray(object $notifiable): array
     {
+        // Get tenant slug for subdomain URL
+        $tenantSlug = $notifiable->tenant->slug ?? 'app';
+        $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
+        $loginUrl = str_replace('://', "://{$tenantSlug}.", $frontendUrl) . '/login';
+
         return [
             'title' => 'Welcome to ' . config('app.name'),
-            'message' => 'Your employee account has been created. Employee Number: ' . $this->employeeNumber,
+            'message' => 'Your employee account has been created. Employee Number: ' . $this->employeeNumber . '. Please use the Forgot Password feature to set your password.',
             'type' => 'welcome',
-            'action_url' => config('app.url') . '/login',
-            'action_text' => 'Login to Portal',
+            'action_url' => $loginUrl,
+            'action_text' => 'Go to Login Page',
             'employee_number' => $this->employeeNumber,
-            'has_temporary_password' => true,
         ];
     }
 }

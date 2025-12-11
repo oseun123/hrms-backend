@@ -4,7 +4,11 @@ namespace App\Http\Controllers\HRIS;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\EmployeeContactDetail;
+use App\Models\EmployeeEmploymentDetail;
+use App\Models\User;
 use App\Helpers\ApiResponse;
+use App\Notifications\WelcomeEmployee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -68,13 +72,36 @@ class EmployeeController extends Controller
                 'passport_number' => 'nullable|string|max:100',
                 'photo' => 'nullable|string|max:255',
                 'is_active' => 'boolean',
+
+                // Employment details (nested)
+                'employment_details' => 'nullable|array',
+                'employment_details.work_email' => 'nullable|email',
+                'employment_details.department_id' => 'nullable|exists:departments,id',
+                'employment_details.position_id' => 'nullable|exists:positions,id',
+                'employment_details.manager_id' => 'nullable|exists:employees,id',
+                'employment_details.employment_type' => 'nullable|string',
+                'employment_details.employment_status' => 'nullable|string',
+                'employment_details.hire_date' => 'nullable|date',
+                'employment_details.probation_end_date' => 'nullable|date',
+                'employment_details.probation_status' => 'nullable|in:pending,passed,failed,extended',
+                'employment_details.confirmation_date' => 'nullable|date',
+                'employment_details.contract_start_date' => 'nullable|date',
+                'employment_details.contract_end_date' => 'nullable|date',
+                'employment_details.termination_date' => 'nullable|date',
+                'employment_details.termination_type' => 'nullable|string',
+                'employment_details.termination_reason' => 'nullable|string',
+                'employment_details.notice_period_days' => 'nullable|integer',
+                'employment_details.work_location' => 'nullable|string',
+                'employment_details.work_schedule' => 'nullable|string',
+                'employment_details.shift' => 'nullable|string',
+                'employment_details.remote_work_eligible' => 'nullable|boolean',
             ]);
 
             // Generate temporary password
             $temporaryPassword = 'Temp' . rand(1000, 9999) . '!';
 
             // Create user account with tenant_id from auth
-            $user = \App\Models\User::create([
+            $user = User::create([
                 'name' => trim($validated['first_name'] . ' ' . ($validated['middle_name'] ?? '') . ' ' . $validated['last_name']),
                 'email' => $validated['email'],
                 'password' => bcrypt($temporaryPassword),
@@ -87,39 +114,52 @@ class EmployeeController extends Controller
             $validated['tenant_id'] = $request->user()->tenant_id; // Use authenticated user's tenant
             $validated['created_by'] = auth()->id();
 
+            // Extract employment details before creating employee
+            $employmentDetailsData = $validated['employment_details'] ?? null;
+            unset($validated['employment_details']);
+
             // Remove email from employee data (it's in users table)
             unset($validated['email']);
 
             $employee = Employee::create($validated);
 
+            // Create employment details if provided
+            if ($employmentDetailsData && !empty($employmentDetailsData)) {
+                EmployeeEmploymentDetail::create(array_merge(
+                    $employmentDetailsData,
+                    [
+                        'tenant_id' => $employee->tenant_id,
+                        'employee_id' => $employee->id,
+                    ]
+                ));
+            }
+
             // Send welcome notification (email + in-app)
-            $user->notify(new \App\Notifications\WelcomeEmployee(
+            $user->notify(new WelcomeEmployee(
                 $user->name,
                 $employee->employee_number,
                 $temporaryPassword
             ));
 
-            return \App\Helpers\ApiResponse::created([
-                'employee' => $employee->load('user'),
-                'temporary_password' => $temporaryPassword,
-                'note' => 'A welcome email has been sent to the employee with login instructions.',
-            ], 'Employee and user account created successfully. Welcome email sent.');
+            return ApiResponse::created([
+                'employee' => $employee->load(['user', 'employmentDetails.department', 'employmentDetails.position', 'employmentDetails.manager']),
+            ], 'Employee and user account created successfully. A welcome email has been sent with instructions to set their password.');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return \App\Helpers\ApiResponse::validationError('Validation failed', $e->errors());
+            return ApiResponse::validationError('Validation failed', $e->errors());
         } catch (\Exception $e) {
             Log::error('Employee creation failed: ' . $e->getMessage(), [
                 'trace' => $e->getTraceAsString()
             ]);
-            return \App\Helpers\ApiResponse::serverError('Failed to create employee. Please try again.');
+            return ApiResponse::serverError('Failed to create employee. Please try again.');
         }
     }
 
     /**
      * Display the specified employee
      */
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::with([
+        $employee->load([
             'user',
             'employmentDetails.department',
             'employmentDetails.position',
@@ -135,7 +175,7 @@ class EmployeeController extends Controller
             'skills.skill',
             'certifications',
             'documents.documentType',
-        ])->findOrFail($id);
+        ]);
 
         return ApiResponse::success($employee);
     }
@@ -143,13 +183,12 @@ class EmployeeController extends Controller
     /**
      * Update the specified employee
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
 
         $validated = $request->validate([
             'user_id' => 'nullable|exists:users,id',
-            'employee_number' => 'required|string|max:50|unique:employees,employee_number,' . $id,
+            'employee_number' => 'required|string|max:50|unique:employees,employee_number,' . $employee->id,
             'first_name' => 'required|string|max:100',
             'middle_name' => 'nullable|string|max:100',
             'last_name' => 'required|string|max:100',
@@ -177,9 +216,8 @@ class EmployeeController extends Controller
     /**
      * Remove the specified employee
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $employee->delete();
 
         return ApiResponse::success(null, 'Employee deleted successfully');
@@ -188,10 +226,9 @@ class EmployeeController extends Controller
     /**
      * Get employment details
      */
-    public function employmentDetails($id)
+    public function employmentDetails(Employee $employee)
     {
-        $employee = Employee::with('employmentDetails.department', 'employmentDetails.position', 'employmentDetails.manager')
-            ->findOrFail($id);
+        $employee->load('employmentDetails.department', 'employmentDetails.position', 'employmentDetails.manager');
 
         return ApiResponse::success($employee->employmentDetails);
     }
@@ -199,9 +236,9 @@ class EmployeeController extends Controller
     /**
      * Get contact details
      */
-    public function contactDetails($id)
+    public function contactDetails(Employee $employee)
     {
-        $employee = Employee::with('contactDetails')->findOrFail($id);
+        $employee->load('contactDetails');
 
         return ApiResponse::success($employee->contactDetails);
     }
@@ -209,9 +246,9 @@ class EmployeeController extends Controller
     /**
      * Get financial details
      */
-    public function financialDetails($id)
+    public function financialDetails(Employee $employee)
     {
-        $employee = Employee::with('financialDetails')->findOrFail($id);
+        $employee->load('financialDetails');
 
         return ApiResponse::success($employee->financialDetails);
     }
@@ -219,9 +256,9 @@ class EmployeeController extends Controller
     /**
      * Get medical details
      */
-    public function medicalDetails($id)
+    public function medicalDetails(Employee $employee)
     {
-        $employee = Employee::with('medicalDetails')->findOrFail($id);
+        $employee->load('medicalDetails');
 
         return ApiResponse::success($employee->medicalDetails);
     }
@@ -229,9 +266,9 @@ class EmployeeController extends Controller
     /**
      * Get employee profile completeness
      */
-    public function profileCompleteness($id)
+    public function profileCompleteness(Employee $employee)
     {
-        $employee = Employee::with('profileCompleteness')->findOrFail($id);
+        $employee->load('profileCompleteness');
 
         return ApiResponse::success($employee->profileCompleteness);
     }
@@ -239,9 +276,9 @@ class EmployeeController extends Controller
     /**
      * Get employee history
      */
-    public function history($id)
+    public function history(Employee $employee)
     {
-        $employee = Employee::with('history')->findOrFail($id);
+        $employee->load('history');
 
         return ApiResponse::success($employee->history);
     }
@@ -249,9 +286,8 @@ class EmployeeController extends Controller
     /**
      * Create employee employment details
      */
-    public function createEmploymentDetails(Request $request, $id)
+    public function createEmploymentDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
 
         // Check if employment details already exist
         if ($employee->employmentDetails) {
@@ -284,7 +320,7 @@ class EmployeeController extends Controller
             'remote_work_eligible' => 'nullable|boolean',
         ]);
 
-        $employmentDetails = \App\Models\EmployeeEmploymentDetail::create(array_merge(
+        $employmentDetails = EmployeeEmploymentDetail::create(array_merge(
             $validated,
             [
                 'tenant_id' => $employee->tenant_id,
@@ -302,9 +338,8 @@ class EmployeeController extends Controller
     /**
      * Create employee contact details
      */
-    public function createContactDetails(Request $request, $id)
+    public function createContactDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
 
         // Check if contact details already exist
         if ($employee->contactDetails) {
@@ -326,7 +361,7 @@ class EmployeeController extends Controller
             'preferred_contact_method' => 'nullable|string',
         ]);
 
-        $contactDetails = \App\Models\EmployeeContactDetail::create(array_merge(
+        $contactDetails = EmployeeContactDetail::create(array_merge(
             $validated,
             [
                 'tenant_id' => $employee->tenant_id,
@@ -344,9 +379,8 @@ class EmployeeController extends Controller
     /**
      * Update employee employment details
      */
-    public function updateEmploymentDetails(Request $request, $id)
+    public function updateEmploymentDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $employmentDetails = $employee->employmentDetails;
 
         if (!$employmentDetails) {
@@ -368,9 +402,8 @@ class EmployeeController extends Controller
     /**
      * Update employee contact details
      */
-    public function updateContactDetails(Request $request, $id)
+    public function updateContactDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $contactDetails = $employee->contactDetails;
 
         if (!$contactDetails) {
@@ -392,9 +425,8 @@ class EmployeeController extends Controller
     /**
      * Update employee financial details
      */
-    public function updateFinancialDetails(Request $request, $id)
+    public function updateFinancialDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $financialDetails = $employee->financialDetails;
 
         if (!$financialDetails) {
@@ -416,9 +448,8 @@ class EmployeeController extends Controller
     /**
      * Update employee medical details
      */
-    public function updateMedicalDetails(Request $request, $id)
+    public function updateMedicalDetails(Request $request, Employee $employee)
     {
-        $employee = Employee::findOrFail($id);
         $medicalDetails = $employee->medicalDetails;
 
         if (!$medicalDetails) {
