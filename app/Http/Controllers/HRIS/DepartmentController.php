@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\HRIS;
 
-use App\Http\Controllers\Controller;
-use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Helpers\ApiResponse;
+use App\Http\Controllers\Controller;
+use App\Models\Hris\Department;
 use App\Traits\HandlesApiErrors;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class DepartmentController extends Controller
@@ -17,14 +17,21 @@ class DepartmentController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = Department::with(['parent', 'manager', 'children'])
+            $query = Department::with(['parent', 'manager', 'children' => function ($q) {
+                $q->withCount('employees');
+            }])
+                ->withCount('employees')
                 ->where('tenant_id', $request->user()->tenant_id);
 
-            if ($request->has('is_active')) {
-                $query->where('is_active', $request->is_active);
+            if (!$request->has('search') && !$request->filled('parent_id') && !$request->boolean('all')) {
+                $query->whereNull('parent_id');
             }
 
-            if ($request->has('parent_id')) {
+            if ($request->filled('is_active')) {
+                $query->where('is_active', $request->boolean('is_active'));
+            }
+
+            if ($request->filled('parent_id')) {
                 $query->where('parent_id', $request->parent_id);
             }
 
@@ -37,7 +44,11 @@ class DepartmentController extends Controller
                 });
             }
 
-            $departments = $query->get();
+            if ($request->hasAny(['per_page', 'page'])) {
+                $departments = $query->paginate($request->get('per_page', 15));
+            } else {
+                $departments = $query->get();
+            }
 
             return ApiResponse::success($departments);
         } catch (\Exception $e) {

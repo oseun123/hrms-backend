@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Level;
+use App\Models\Hris\Level;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class LevelSeeder extends Seeder
 {

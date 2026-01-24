@@ -7,7 +7,7 @@ class UpdateAddressRequest extends StoreAddressRequest
     public function rules()
     {
         return [
-            'address_type' => 'sometimes|required|in:home,work,mailing',
+            'address_type' => 'sometimes|required|in:home,work,mailing,current,permanent',
             'address_line1' => 'sometimes|required|string|max:255',
             'address_line2' => 'nullable|string|max:255',
             'city' => 'sometimes|required|string|max:100',

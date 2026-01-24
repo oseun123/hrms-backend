@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreFinancialDetailsRequest;
 use App\Http\Requests\HRIS\UpdateFinancialDetailsRequest;
-use App\Models\Employee;
-use App\Models\EmployeeFinancialDetail;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeFinancialDetail;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class FinancialDetailsController extends Controller
@@ -53,7 +53,7 @@ class FinancialDetailsController extends Controller
         try {
             $financialDetails = $employee->financialDetails;
 
-            if (!$financialDetails) {
+            if (! $financialDetails) {
                 return ApiResponse::notFound('Financial details not found. Please create them first.');
             }
 
@@ -76,7 +76,7 @@ class FinancialDetailsController extends Controller
         try {
             $financialDetails = $employee->financialDetails;
 
-            if (!$financialDetails) {
+            if (! $financialDetails) {
                 return ApiResponse::notFound('Financial details not found');
             }
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreAddressRequest;
 use App\Http\Requests\HRIS\UpdateAddressRequest;
-use App\Models\Employee;
-use App\Models\EmployeeAddress;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeAddress;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class AddressController extends Controller

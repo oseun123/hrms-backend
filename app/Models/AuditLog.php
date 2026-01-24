@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Traits\HasRegionalSettings;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AuditLog extends Model
+class AuditLog extends BaseModel
 {
     use HasFactory;
 

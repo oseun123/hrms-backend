@@ -1,0 +1,157 @@
+[
+    {
+        "id": 1,
+        "quote": "Success is not final; failure is not fatal: it is the courage to continue that counts.",
+        "author": "Winston Churchill"
+    },
+    {
+        "id": 2,
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 3,
+        "quote": "Believe you can and you're halfway there.",
+        "author": "Theodore Roosevelt"
+    },
+    {
+        "id": 4,
+        "quote": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 5,
+        "quote": "Opportunities don't happen, you create them.",
+        "author": "Chris Grosser"
+    },
+    {
+        "id": 6,
+        "quote": "Don't be afraid to give up the good to go for the great.",
+        "author": "John D. Rockefeller"
+    },
+    {
+        "id": 7,
+        "quote": "I find that the harder I work, the more luck I seem to have.",
+        "author": "Thomas Jefferson"
+    },
+    {
+        "id": 8,
+        "quote": "Success usually comes to those who are too busy to be looking for it.",
+        "author": "Henry David Thoreau"
+    },
+    {
+        "id": 9,
+        "quote": "There are no secrets to success. It is the result of preparation, hard work, and learning from failure.",
+        "author": "Colin Powell"
+    },
+    {
+        "id": 10,
+        "quote": "The way to get started is to quit talking and begin doing.",
+        "author": "Walt Disney"
+    },
+    {
+        "id": 11,
+        "quote": "Don't let yesterday take up too much of today.",
+        "author": "Will Rogers"
+    },
+    {
+        "id": 12,
+        "quote": "If you are working on something that you really care about, you don't have to be pushed. The vision pulls you.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 13,
+        "quote": "Concentrate all your thoughts upon the work at hand. The sun's rays do not burn until brought to a focus.",
+        "author": "Alexander Graham Bell"
+    },
+    {
+        "id": 14,
+        "quote": "The future depends on what you do today.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "id": 15,
+        "quote": "Success is walking from failure to failure with no loss of enthusiasm.",
+        "author": "Winston Churchill"
+    },
+    {
+        "id": 16,
+        "quote": "Go as far as you can see; when you get there, you'll be able to see further.",
+        "author": "Thomas Carlyle"
+    },
+    {
+        "id": 17,
+        "quote": "The only limit to our realization of tomorrow will be our doubts of today.",
+        "author": "Franklin D. Roosevelt"
+    },
+    {
+        "id": 18,
+        "quote": "The best way to predict the future is to create it.",
+        "author": "Peter Drucker"
+    },
+    {
+        "id": 19,
+        "quote": "Strive not to be a success, but rather to be of value.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 20,
+        "quote": "A person who never made a mistake never tried anything new.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 21,
+        "quote": "Quality means doing it right when no one is looking.",
+        "author": "Henry Ford"
+    },
+    {
+        "id": 22,
+        "quote": "Whether you think you can or you think you can't, you're right.",
+        "author": "Henry Ford"
+    },
+    {
+        "id": 23,
+        "quote": "The secret of getting ahead is getting started.",
+        "author": "Mark Twain"
+    },
+    {
+        "id": 24,
+        "quote": "Everything you've ever wanted is on the other side of fear.",
+        "author": "George Addair"
+    },
+    {
+        "id": 25,
+        "quote": "Do not wait; the time will never be 'just right.' Start where you stand, and work with whatever tools you may have at your command.",
+        "author": "George Herbert"
+    },
+    {
+        "id": 26,
+        "quote": "Believe in yourself! Have faith in your abilities! Without a humble but reasonable confidence in your own powers you cannot be successful or happy.",
+        "author": "Norman Vincent Peale"
+    },
+    {
+        "id": 27,
+        "quote": "Setting goals is the first step in turning the invisible into the visible.",
+        "author": "Tony Robbins"
+    },
+    {
+        "id": 28,
+        "quote": "Your talent determines what you can do. Your motivation determines how much you are willing to do. Your attitude determines how well you do it.",
+        "author": "Lou Holtz"
+    },
+    {
+        "id": 29,
+        "quote": "Innovation distinguishes between a leader and a follower.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 30,
+        "quote": "The only place where success comes before work is in the dictionary.",
+        "author": "Vidal Sassoon"
+    },
+    {
+        "id": 31,
+        "quote": "Hard work beats talent when talent doesn't work hard.",
+        "author": "Tim Notke"
+    }
+]

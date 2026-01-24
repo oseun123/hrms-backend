@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
-use App\Http\Controllers\Controller;
-use App\Models\EmployeeDocument;
-use App\Models\Employee;
-use Illuminate\Http\Request;
-use App\Services\FileUploadService;
 use App\Helpers\ApiResponse;
+use App\Http\Controllers\Controller;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeDocument;
+use App\Services\FileUploadService;
 use App\Traits\HandlesApiErrors;
+use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
@@ -58,7 +58,7 @@ class DocumentController extends Controller
                 'employee-documents',
                 [
                     'employee_id' => $employee->id,
-                    'validation' => ['mimes:pdf,doc,docx,jpg,jpeg,png', 'max:10240']
+                    'validation' => ['mimes:pdf,doc,docx,jpg,jpeg,png', 'max:10240'],
                 ]
             );
 
@@ -106,6 +106,39 @@ class DocumentController extends Controller
             return ApiResponse::notFound('Document not found');
         } catch (\Exception $e) {
             return $this->handleException($e, 'Fetching document');
+        }
+    }
+
+    public function download(Employee $employee, $documentId)
+    {
+        try {
+            $document = EmployeeDocument::where('employee_id', $employee->id)
+                ->findOrFail($documentId);
+
+            if (!$document->file_path || !$this->fileUploadService->exists($document->file_path, $document->storage_driver)) {
+                return ApiResponse::notFound('File not found');
+            }
+
+            // We can't easily use Storage::download with the FileUploadService abstraction if it returns a URL or behaves differently
+            // However, assuming LocalUploadDriver uses standard storage, we can try to return a stream or use a helper
+            // Let's check FileUploadService again. It has getUrl but not "download".
+            // But LocalUploadDriver uses Storage::disk('public').
+            // So we can use Storage::disk('public')->download($document->file_path, $document->document_name);
+
+            // Re-reading DocumentController, it doesn't import Storage.
+            // I should stick to using the service or standard Laravel Storage if I know the disk.
+            // The service stores the driver name.
+
+            $disk = $document->storage_driver === 'cloudinary' ? 'cloudinary' : 'public';
+
+            return \Illuminate\Support\Facades\Storage::disk($disk)->download(
+                $document->file_path,
+                $document->document_name . '.' . pathinfo($document->file_path, PATHINFO_EXTENSION)
+            );
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return ApiResponse::notFound('Document not found');
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Document download');
         }
     }
 

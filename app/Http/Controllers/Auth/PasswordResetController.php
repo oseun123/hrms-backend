@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\DB;
 
 class PasswordResetController extends Controller
 {
@@ -24,7 +23,7 @@ class PasswordResetController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return ApiResponse::notFound('We could not find a user with that email address.');
         }
 
@@ -40,18 +39,16 @@ class PasswordResetController extends Controller
                 'email' => $request->email,
                 'token' => Hash::make($token),
                 'expires_at' => now()->addHour(), // Token expires in 1 hour
+                'used_at' => null, // Reset used_at field for new token
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
         );
 
         // Send email notification using Notification facade
-        $user->notify(new \App\Notifications\PasswordResetNotification($token, $request->email));
+        $user->notify(new \App\Notifications\PasswordResetNotification($token, $request->email, $user->tenant));
 
-        // For development, return the token directly
-        // In production, remove the token from response
         return ApiResponse::success([
-            'reset_token' => $token, // Remove this in production
             'email' => $request->email,
         ], 'Password reset instructions sent to your email.');
     }
@@ -72,12 +69,12 @@ class PasswordResetController extends Controller
             ->where('email', $request->email)
             ->first();
 
-        if (!$resetRecord) {
+        if (! $resetRecord) {
             return ApiResponse::error('Invalid reset token.', 400);
         }
 
         // Verify token
-        if (!Hash::check($request->token, $resetRecord->token)) {
+        if (! Hash::check($request->token, $resetRecord->token)) {
             return ApiResponse::error('Invalid reset token.', 400);
         }
 

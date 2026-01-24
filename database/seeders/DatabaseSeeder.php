@@ -19,6 +19,14 @@ class DatabaseSeeder extends Seeder
             PositionSeeder::class,
             EmployeeSeeder::class,
             DocumentTypeSeeder::class,
+            SkillSeeder::class,
+            DefaultSecurityPoliciesSeeder::class,
+            DefaultPreferencesSeeder::class,
+            PublicHolidaySeeder::class,
+            EmployeeNumberFormatSeeder::class,
+            PermissionSeeder::class,
+            LeaveTypeSeeder::class,
+            LeaveWorkflowSeeder::class,
         ]);
 
         $this->command->info('');

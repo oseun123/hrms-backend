@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Services\Upload\UploadDriverInterface;
-use App\Services\Upload\LocalUploadDriver;
 use App\Services\Upload\CloudinaryUploadDriver;
+use App\Services\Upload\LocalUploadDriver;
+use App\Services\Upload\UploadDriverInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,10 +20,6 @@ class FileUploadService
     /**
      * Upload a file
      *
-     * @param UploadedFile $file
-     * @param string $folder
-     * @param array $options
-     * @return array
      * @throws \Exception
      */
     public function upload(UploadedFile $file, string $folder, array $options = []): array
@@ -39,47 +35,42 @@ class FileUploadService
     /**
      * Delete a file
      *
-     * @param string $path
-     * @param string|null $driver Override driver (for deleting old files)
-     * @return bool
+     * @param  string|null  $driver  Override driver (for deleting old files)
      */
     public function delete(string $path, ?string $driver = null): bool
     {
         $uploadDriver = $driver ? $this->resolveDriver($driver) : $this->driver;
+
         return $uploadDriver->delete($path);
     }
 
     /**
      * Get public URL for a file
      *
-     * @param string $path
-     * @param string|null $driver Override driver
-     * @return string
+     * @param  string|null  $driver  Override driver
      */
     public function getUrl(string $path, ?string $driver = null): string
     {
         $uploadDriver = $driver ? $this->resolveDriver($driver) : $this->driver;
+
         return $uploadDriver->getUrl($path);
     }
 
     /**
      * Check if file exists
      *
-     * @param string $path
-     * @param string|null $driver Override driver
-     * @return bool
+     * @param  string|null  $driver  Override driver
      */
     public function exists(string $path, ?string $driver = null): bool
     {
         $uploadDriver = $driver ? $this->resolveDriver($driver) : $this->driver;
+
         return $uploadDriver->exists($path);
     }
 
     /**
      * Validate uploaded file
      *
-     * @param UploadedFile $file
-     * @param array $rules
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validateFile(UploadedFile $file, array $rules): void
@@ -96,8 +87,6 @@ class FileUploadService
 
     /**
      * Get current driver name
-     *
-     * @return string
      */
     public function getDriverName(): string
     {
@@ -106,9 +95,6 @@ class FileUploadService
 
     /**
      * Resolve the upload driver based on config
-     *
-     * @param string|null $driverName
-     * @return UploadDriverInterface
      */
     protected function resolveDriver(?string $driverName = null): UploadDriverInterface
     {
@@ -116,10 +102,10 @@ class FileUploadService
 
         switch ($driver) {
             case 'cloudinary':
-                return new CloudinaryUploadDriver();
+                return new CloudinaryUploadDriver;
             case 'local':
             default:
-                return new LocalUploadDriver();
+                return new LocalUploadDriver;
         }
     }
 }

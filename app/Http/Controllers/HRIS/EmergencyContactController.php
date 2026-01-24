@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreEmergencyContactRequest;
 use App\Http\Requests\HRIS\UpdateEmergencyContactRequest;
-use App\Models\Employee;
-use App\Models\EmployeeEmergencyContact;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeEmergencyContact;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class EmergencyContactController extends Controller

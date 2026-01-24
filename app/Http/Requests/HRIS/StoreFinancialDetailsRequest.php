@@ -26,10 +26,10 @@ class StoreFinancialDetailsRequest extends FormRequest
             'social_security_number' => 'nullable|string|max:50',
             'pension_number' => 'nullable|string|max:50',
             'insurance_number' => 'nullable|string|max:50',
-            'current_salary' => 'required|numeric|min:0',
-            'salary_currency' => 'required|string|size:3',
-            'payment_frequency' => 'required|in:monthly,bi-weekly,weekly,daily',
-            'payment_method' => 'nullable|in:bank_transfer,cash,cheque',
+            'current_salary' => 'nullable|numeric|min:0',
+            'salary_currency' => 'nullable|string|size:3',
+            'payment_frequency' => 'nullable|in:monthly,bi-weekly,weekly,daily',
+            'payment_method' => 'nullable|in:bank-transfer,cash,cheque,mobile-money',
         ];
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreEducationRequest;
 use App\Http\Requests\HRIS\UpdateEducationRequest;
-use App\Models\Employee;
-use App\Models\EmployeeEducation;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeEducation;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class EducationController extends Controller

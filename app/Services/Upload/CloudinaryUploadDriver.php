@@ -3,8 +3,8 @@
 namespace App\Services\Upload;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class CloudinaryUploadDriver implements UploadDriverInterface
 {
@@ -47,9 +47,11 @@ class CloudinaryUploadDriver implements UploadDriverInterface
     {
         try {
             Cloudinary::destroy($path);
+
             return true;
         } catch (\Exception $e) {
             Log::error('Cloudinary delete failed: ' . $e->getMessage());
+
             return false;
         }
     }
@@ -70,7 +72,8 @@ class CloudinaryUploadDriver implements UploadDriverInterface
         try {
             // Try to get the resource info
             $result = Cloudinary::getResource($path);
-            return !empty($result);
+
+            return ! empty($result);
         } catch (\Exception $e) {
             return false;
         }

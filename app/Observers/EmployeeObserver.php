@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Employee;
+use App\Models\Hris\Employee;
 use App\Services\ProfileCompletenessService;
 
 class EmployeeObserver

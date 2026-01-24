@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Employee;
+use App\Models\Hris\Employee;
 use App\Services\ProfileCompletenessService;
+use Illuminate\Console\Command;
 
 class RecalculateProfileCompleteness extends Command
 {
@@ -44,14 +44,15 @@ class RecalculateProfileCompleteness extends Command
             // Recalculate for specific employee
             $employee = Employee::find($employeeId);
 
-            if (!$employee) {
+            if (! $employee) {
                 $this->error("Employee with ID {$employeeId} not found.");
+
                 return 1;
             }
 
             $this->info("Recalculating profile completeness for employee: {$employee->full_name}");
             $this->completenessService->calculate($employee);
-            $this->info("✓ Completed!");
+            $this->info('✓ Completed!');
         } else {
             // Recalculate for all employees
             $employees = Employee::with([
@@ -61,7 +62,7 @@ class RecalculateProfileCompleteness extends Command
                 'medicalDetails',
                 'addresses',
                 'education',
-                'documents.documentType'
+                'documents.documentType',
             ])->get();
 
             $this->info("Recalculating profile completeness for {$employees->count()} employees...");
@@ -76,7 +77,7 @@ class RecalculateProfileCompleteness extends Command
 
             $bar->finish();
             $this->newLine();
-            $this->info("✓ All profile completeness records updated!");
+            $this->info('✓ All profile completeness records updated!');
         }
 
         return 0;

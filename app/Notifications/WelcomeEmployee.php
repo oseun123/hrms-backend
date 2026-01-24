@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Traits\HasTenantBranding;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -9,10 +10,12 @@ use Illuminate\Notifications\Notification;
 
 class WelcomeEmployee extends Notification implements ShouldQueue
 {
-    use Queueable;
+    use Queueable, HasTenantBranding;
 
     protected $temporaryPassword;
+
     protected $employeeName;
+
     protected $employeeNumber;
 
     /**
@@ -38,6 +41,10 @@ class WelcomeEmployee extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $tenantId = $notifiable->tenant_id;
+        $branding = $this->getTenantBranding($tenantId);
+        $companyName = $branding['name'] ?? config('app.name');
+
         // Get tenant slug for subdomain URL
         $tenantSlug = $notifiable->tenant->slug ?? 'app';
         $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
@@ -46,18 +53,19 @@ class WelcomeEmployee extends Notification implements ShouldQueue
         $loginUrl = str_replace('://', "://{$tenantSlug}.", $frontendUrl) . '/login';
         $forgotPasswordUrl = str_replace('://', "://{$tenantSlug}.", $frontendUrl) . '/forgot-password';
 
-        return (new MailMessage)
-            ->subject('Welcome to ' . config('app.name'))
+        $mailMessage = (new MailMessage)
+            ->subject('Welcome to ' . $companyName)
             ->greeting('Hello ' . $this->employeeName . '!')
-            ->line('Welcome to ' . config('app.name') . '! Your employee account has been created.')
+            ->line('Welcome to ' . $companyName . '! Your employee account has been created.')
             ->line('**Employee Number:** ' . $this->employeeNumber)
             ->line('**Email:** ' . $notifiable->email)
             ->line('To access your account, please set your password using the "Forgot Password" feature on the login page.')
             ->line('Simply click the link below, then use the "Forgot Password" link to receive a password reset email.')
             ->action('Go to Login Page', $loginUrl)
             ->line('Or visit: ' . $forgotPasswordUrl)
-            ->line('If you have any questions, please contact your HR department.')
-            ->line('Thank you for joining our team!');
+            ->line('If you have any questions, please contact our ' . ($branding['hr_email'] ? 'HR department' : 'support team') . '.');
+
+        return $this->applyBranding($mailMessage, $tenantId);
     }
 
     /**

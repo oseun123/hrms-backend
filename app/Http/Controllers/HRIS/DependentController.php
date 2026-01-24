@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreDependentRequest;
 use App\Http\Requests\HRIS\UpdateDependentRequest;
-use App\Models\Employee;
-use App\Models\EmployeeDependent;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeDependent;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class DependentController extends Controller

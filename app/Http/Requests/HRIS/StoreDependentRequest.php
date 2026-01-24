@@ -15,10 +15,12 @@ class StoreDependentRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'relationship' => 'required|in:spouse,child,parent,sibling,other',
+            'relationship' => 'required|string|max:100',
             'date_of_birth' => 'required|date|before:today',
             'gender' => 'required|in:male,female,other',
             'national_id' => 'nullable|string|max:50',
+            'is_student' => 'boolean',
+            'is_disabled' => 'boolean',
             'is_beneficiary' => 'boolean',
             'beneficiary_percentage' => 'nullable|numeric|min:0|max:100',
         ];

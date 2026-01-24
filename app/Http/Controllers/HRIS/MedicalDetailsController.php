@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\HRIS;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HRIS\StoreMedicalDetailsRequest;
 use App\Http\Requests\HRIS\UpdateMedicalDetailsRequest;
-use App\Models\Employee;
-use App\Models\EmployeeMedicalDetail;
+use App\Models\Hris\Employee;
+use App\Models\Hris\EmployeeMedicalDetail;
 use App\Services\ProfileCompletenessService;
-use App\Helpers\ApiResponse;
 use App\Traits\HandlesApiErrors;
 
 class MedicalDetailsController extends Controller
@@ -46,7 +46,7 @@ class MedicalDetailsController extends Controller
         try {
             $medicalDetails = $employee->medicalDetails;
 
-            if (!$medicalDetails) {
+            if (! $medicalDetails) {
                 return ApiResponse::notFound('Medical details not found. Please create them first.');
             }
 
@@ -64,7 +64,7 @@ class MedicalDetailsController extends Controller
         try {
             $medicalDetails = $employee->medicalDetails;
 
-            if (!$medicalDetails) {
+            if (! $medicalDetails) {
                 return ApiResponse::notFound('Medical details not found');
             }
 

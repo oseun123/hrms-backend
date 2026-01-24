@@ -9,7 +9,7 @@ class ApiResponse
     /**
      * Success response
      */
-    public static function success($data = null, string $message = null, int $code = 200): JsonResponse
+    public static function success($data = null, ?string $message = null, int $code = 200): JsonResponse
     {
         $response = [
             'success' => true,

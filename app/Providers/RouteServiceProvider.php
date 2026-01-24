@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         // Custom route model binding for Employee with tenant filtering
         Route::bind('employee', function ($value) {
-            $employee = \App\Models\Employee::where('id', $value);
+            $employee = \App\Models\Hris\Employee::where('id', $value);
 
             // If user is authenticated, filter by tenant
             if (auth()->check() && auth()->user()->tenant_id) {
@@ -69,7 +69,12 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(300)->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        // Patch for Sanctum's stateful middleware throttling
+        RateLimiter::for(\App\Models\User::class . '::api', function (Request $request) {
+            return Limit::perMinute(300)->by(optional($request->user())->id ?: $request->ip());
         });
     }
 }

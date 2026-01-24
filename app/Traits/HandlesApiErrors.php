@@ -4,8 +4,8 @@ namespace App\Traits;
 
 use App\Helpers\ApiResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 trait HandlesApiErrors
 {
@@ -23,11 +23,11 @@ trait HandlesApiErrors
         }
 
         // Log the error
-        Log::error("{$context} failed: " . $e->getMessage(), [
+        Log::error("{$context} failed: ".$e->getMessage(), [
             'exception' => get_class($e),
             'file' => $e->getFile(),
             'line' => $e->getLine(),
-            'trace' => $e->getTraceAsString()
+            'trace' => $e->getTraceAsString(),
         ]);
 
         return ApiResponse::serverError("{$context} failed. Please try again.");

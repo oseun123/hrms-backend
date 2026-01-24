@@ -26,9 +26,9 @@ class UpdateFinancialDetailsRequest extends FormRequest
             'social_security_number' => 'nullable|string|max:50',
             'pension_number' => 'nullable|string|max:50',
             'insurance_number' => 'nullable|string|max:50',
-            'current_salary' => 'sometimes|required|numeric|min:0',
-            'salary_currency' => 'sometimes|required|string|size:3',
-            'payment_frequency' => 'sometimes|required|in:monthly,bi-weekly,weekly,daily',
+            'current_salary' => 'nullable|numeric|min:0',
+            'salary_currency' => 'nullable|string|size:3',
+            'payment_frequency' => 'nullable|in:monthly,bi-weekly,weekly,daily',
             'payment_method' => 'nullable|in:bank_transfer,cash,cheque',
         ];
     }

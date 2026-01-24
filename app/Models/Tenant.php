@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Hris\Department;
+use App\Models\Hris\Employee;
+use App\Models\Hris\Grade;
+use App\Models\Hris\Level;
+use App\Models\Hris\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tenant extends Model
+class Tenant extends BaseModel
 {
     use HasFactory, SoftDeletes;
 
@@ -18,10 +23,63 @@ class Tenant extends Model
         'settings',
     ];
 
-    protected $casts = [
-        'is_active' => 'boolean',
-        'settings' => 'array',
-    ];
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['logo_url', 'theme_color'];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+            'settings' => 'array',
+        ];
+    }
+
+    /**
+     * Accessor for logo_url
+     */
+    public function getLogoUrlAttribute()
+    {
+        $value = \App\Models\Preference\Preference::where('tenant_id', $this->id)
+            ->where('category', 'organization')
+            ->where('key', 'logo_url')
+            ->whereNull('user_id')
+            ->value('value');
+
+        if (!$value) {
+            return null;
+        }
+
+        // If it's a base64 string, return it as is
+        if (str_starts_with($value, 'data:image')) {
+            return $value;
+        }
+
+        // Otherwise, resolve the URL using FileUploadService
+        return app(\App\Services\FileUploadService::class)->getUrl($value);
+    }
+
+    /**
+     * Accessor for theme_color
+     */
+    public function getThemeColorAttribute()
+    {
+        $value = \App\Models\Preference\Preference::where('tenant_id', $this->id)
+            ->where('category', 'display')
+            ->where('key', 'theme_color')
+            ->whereNull('user_id')
+            ->value('value');
+
+        return $value ?? 'geekblue';
+    }
 
     // Relationships
     public function users()

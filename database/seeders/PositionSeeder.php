@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Position;
-use App\Models\Department;
-use App\Models\Level;
-use App\Models\Grade;
+use App\Models\Hris\Department;
+use App\Models\Hris\Grade;
+use App\Models\Hris\Level;
+use App\Models\Hris\Position;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class PositionSeeder extends Seeder
 {

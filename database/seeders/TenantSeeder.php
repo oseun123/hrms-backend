@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Tenant;
-use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 
 class TenantSeeder extends Seeder
 {

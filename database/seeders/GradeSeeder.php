@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Grade;
+use App\Models\Hris\Grade;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class GradeSeeder extends Seeder
 {
