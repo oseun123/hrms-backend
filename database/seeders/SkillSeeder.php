@@ -4,10 +4,18 @@ namespace Database\Seeders;
 
 use App\Models\Hris\Skill;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class SkillSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeds.
      */
@@ -126,7 +134,7 @@ class SkillSeeder extends Seeder
         ];
 
         // Get all tenants
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             foreach ($skills as $skill) {
@@ -146,7 +154,7 @@ class SkillSeeder extends Seeder
 
         // If no tenants exist, output a message
         if ($tenants->count() === 0) {
-            $this->command->info('No tenants found. Skills were not seeded. Ensure tenants exist first.');
+            $this->command?->info('No tenants found. Skills were not seeded. Ensure tenants exist first.');
         }
     }
 }

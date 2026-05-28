@@ -73,16 +73,15 @@ class LeaveGroupAssignmentController extends Controller
     public function assign(Request $request)
     {
         try {
+            $tenantId = Auth::user()->tenant_id;
             $validator = Validator::make($request->all(), [
-                'employee_id' => 'required|exists:employees,id',
-                'leave_group_id' => 'required|exists:leave_groups,id',
+                'employee_id' => 'required|exists:employees,id,tenant_id,' . $tenantId,
+                'leave_group_id' => 'required|exists:leave_groups,id,tenant_id,' . $tenantId,
             ]);
 
             if ($validator->fails()) {
                 return ApiResponse::validationError('Validation failed', $validator->errors());
             }
-
-            $tenantId = Auth::user()->tenant_id;
 
             $employmentDetails = EmployeeEmploymentDetail::whereHas('employee', function ($q) use ($tenantId, $request) {
                 $q->where('tenant_id', $tenantId)
@@ -108,10 +107,11 @@ class LeaveGroupAssignmentController extends Controller
     public function bulkAssign(Request $request)
     {
         try {
+            $tenantId = Auth::user()->tenant_id;
             $validator = Validator::make($request->all(), [
                 'employee_ids' => 'required|array',
-                'employee_ids.*' => 'exists:employees,id',
-                'leave_group_id' => 'required|exists:leave_groups,id',
+                'employee_ids.*' => 'exists:employees,id,tenant_id,' . $tenantId,
+                'leave_group_id' => 'required|exists:leave_groups,id,tenant_id,' . $tenantId,
             ]);
 
             if ($validator->fails()) {

@@ -31,13 +31,8 @@ class MotivationalQuoteController extends Controller
                 return ApiResponse::error('No motivational quotes found', 404);
             }
 
-            // Get current day of the month (1-31)
-            $dayOfMonth = (int) now()->format('j');
-
-            // Adjust index (day 1 is index 0)
-            $index = ($dayOfMonth - 1) % count($quotes);
-
-            $quote = $quotes[$index];
+            // Pick a random quote instead of day-of-month to increase variety
+            $quote = $quotes[array_rand($quotes)];
 
             return ApiResponse::success($quote);
         } catch (\Exception $e) {

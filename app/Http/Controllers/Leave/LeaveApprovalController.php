@@ -41,7 +41,7 @@ class LeaveApprovalController extends Controller
             if ($request->filled('search')) {
                 $search = $request->search;
                 $query->whereHas('leaveRequest.employee', function ($q) use ($search) {
-                    $q->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', "%{$search}%")
+                    $q->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$search}%"])
                         ->orWhere('employee_number', 'LIKE', "%{$search}%");
                 });
             }
@@ -122,7 +122,7 @@ class LeaveApprovalController extends Controller
             if ($request->filled('search')) {
                 $search = $request->search;
                 $query->whereHas('leaveRequest.employee', function ($q) use ($search) {
-                    $q->where(DB::raw("CONCAT(first_name, ' ', last_name)"), 'LIKE', "%{$search}%")
+                    $q->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$search}%"])
                         ->orWhere('employee_number', 'LIKE', "%{$search}%");
                 });
             }

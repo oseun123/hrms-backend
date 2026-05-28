@@ -40,7 +40,7 @@ class LeaveWorkflowController extends Controller
                 'levels' => 'required|array|min:1',
                 'levels.*.level' => 'required|integer|min:1',
                 'levels.*.approver_type' => 'required|string|in:manager,team_lead,secondary_manager,hr,specific_employee',
-                'levels.*.approver_id' => 'required_if:levels.*.approver_type,specific_employee|nullable|exists:employees,id',
+                'levels.*.approver_id' => 'required_if:levels.*.approver_type,specific_employee|nullable|exists:employees,id,tenant_id,' . $tenantId,
             ]);
 
             DB::beginTransaction();
@@ -97,7 +97,7 @@ class LeaveWorkflowController extends Controller
                 'levels' => 'array',
                 'levels.*.level' => 'required|integer|min:1',
                 'levels.*.approver_type' => 'required|string|in:manager,team_lead,secondary_manager,hr,specific_employee',
-                'levels.*.approver_id' => 'required_if:levels.*.approver_type,specific_employee|nullable|exists:employees,id',
+                'levels.*.approver_id' => 'required_if:levels.*.approver_type,specific_employee|nullable|exists:employees,id,tenant_id,' . $tenantId,
             ]);
 
             DB::beginTransaction();

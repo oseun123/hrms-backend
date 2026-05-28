@@ -34,6 +34,6 @@ class TenantSeeder extends Seeder
             );
         }
 
-        $this->command->info('Tenants seeded successfully!');
+        $this->command?->info('Tenants seeded successfully!');
     }
 }

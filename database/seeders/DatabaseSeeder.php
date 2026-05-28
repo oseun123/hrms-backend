@@ -27,14 +27,16 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             LeaveTypeSeeder::class,
             LeaveWorkflowSeeder::class,
+            PayrollSeeder::class,
+            RequestModuleSeeder::class,
         ]);
 
-        $this->command->info('');
-        $this->command->info('====================================');
-        $this->command->info('Database seeded successfully!');
-        $this->command->info('====================================');
-        $this->command->info('Admin: admin@hrms.local / password');
-        $this->command->info('Employee: john.doe@hrms.local / password');
-        $this->command->info('====================================');
+        $this->command?->info('');
+        $this->command?->info('====================================');
+        $this->command?->info('Database seeded successfully!');
+        $this->command?->info('====================================');
+        $this->command?->info('Admin: admin@hrms.local / password');
+        $this->command?->info('Employee: john.doe@hrms.local / password');
+        $this->command?->info('====================================');
     }
 }

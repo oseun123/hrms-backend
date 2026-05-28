@@ -41,16 +41,14 @@ class LeavePolicyController extends Controller
         try {
             $tenantId = Auth::user()->tenant_id;
             $validated = $request->validate([
-                'leave_type_id' => 'required|exists:leave_types,id',
-                'leave_group_id' => 'required|exists:leave_groups,id',
+                'leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
+                'leave_group_id' => 'required|exists:leave_groups,id,tenant_id,' . $tenantId,
                 'entitlement_days' => 'required|numeric|min:0',
                 'accrual_frequency' => 'required|in:yearly,monthly,on_hire,manual',
                 'is_prorated' => 'boolean',
                 'allow_carry_forward' => 'boolean',
                 'max_carry_forward_days' => 'numeric|min:0',
                 'carry_forward_expiry_months' => 'nullable|integer|min:1',
-                'allow_encashment' => 'boolean',
-                'max_encashment_days' => 'numeric|min:0',
                 'min_service_days' => 'integer|min:0',
                 'max_consecutive_days' => 'nullable|integer|min:1',
                 'notice_period_days' => 'integer|min:0',
@@ -58,8 +56,10 @@ class LeavePolicyController extends Controller
                 'max_negative_days' => 'numeric|min:0',
                 'include_public_holidays' => 'boolean',
                 'include_weekends' => 'boolean',
+                'allow_backdated_leave' => 'boolean',
+                'max_backdated_days' => 'integer|min:0',
                 'is_active' => 'boolean',
-                'leave_workflow_id' => 'nullable|exists:leave_workflows,id',
+                'leave_workflow_id' => 'nullable|exists:leave_workflows,id,tenant_id,' . $tenantId,
             ]);
 
             if (empty($validated['leave_workflow_id'])) {
@@ -98,16 +98,14 @@ class LeavePolicyController extends Controller
             $leavePolicy = LeavePolicy::where('tenant_id', $tenantId)->findOrFail($id);
 
             $validated = $request->validate([
-                'leave_type_id' => 'exists:leave_types,id',
-                'leave_group_id' => 'exists:leave_groups,id',
+                'leave_type_id' => 'exists:leave_types,id,tenant_id,' . $tenantId,
+                'leave_group_id' => 'exists:leave_groups,id,tenant_id,' . $tenantId,
                 'entitlement_days' => 'numeric|min:0',
                 'accrual_frequency' => 'in:yearly,monthly,on_hire,manual',
                 'is_prorated' => 'boolean',
                 'allow_carry_forward' => 'boolean',
                 'max_carry_forward_days' => 'numeric|min:0',
                 'carry_forward_expiry_months' => 'nullable|integer|min:1',
-                'allow_encashment' => 'boolean',
-                'max_encashment_days' => 'numeric|min:0',
                 'min_service_days' => 'integer|min:0',
                 'max_consecutive_days' => 'nullable|integer|min:1',
                 'notice_period_days' => 'integer|min:0',
@@ -115,8 +113,10 @@ class LeavePolicyController extends Controller
                 'max_negative_days' => 'numeric|min:0',
                 'include_public_holidays' => 'boolean',
                 'include_weekends' => 'boolean',
+                'allow_backdated_leave' => 'boolean',
+                'max_backdated_days' => 'integer|min:0',
                 'is_active' => 'boolean',
-                'leave_workflow_id' => 'nullable|exists:leave_workflows,id',
+                'leave_workflow_id' => 'nullable|exists:leave_workflows,id,tenant_id,' . $tenantId,
             ]);
 
             $leavePolicy->update($validated);

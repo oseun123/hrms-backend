@@ -28,6 +28,7 @@ class LeaveRequest extends BaseModel
         'applied_at',
         'cancelled_by',
         'cancelled_at',
+        'request_leave_allowance',
     ];
 
     protected $appends = ['attachment_url'];
@@ -38,7 +39,9 @@ class LeaveRequest extends BaseModel
         'duration_days' => 'decimal:2',
         'applied_at' => 'datetime',
         'cancelled_at' => 'datetime',
+        'request_leave_allowance' => 'boolean',
     ];
+
 
     public function tenant()
     {

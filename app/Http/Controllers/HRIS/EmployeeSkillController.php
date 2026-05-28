@@ -46,8 +46,9 @@ class EmployeeSkillController extends Controller
     public function store(Request $request, Employee $employee)
     {
         try {
+            $tenantId = $request->user()->tenant_id;
             $validated = $request->validate([
-                'skill_id' => 'required|exists:skills,id',
+                'skill_id' => 'required|exists:skills,id,tenant_id,' . $tenantId,
                 'proficiency_level' => 'required|string|max:50',
                 'years_of_experience' => 'nullable|numeric|min:0',
                 'last_used' => 'nullable|date',
@@ -55,6 +56,8 @@ class EmployeeSkillController extends Controller
                 'certification_name' => 'nullable|string|max:255',
                 'certification_date' => 'nullable|date',
             ]);
+
+            $validated['tenant_id'] = $tenantId;
 
             // Check if skill is already assigned
             $existing = EmployeeSkill::where('employee_id', $employee->id)
@@ -65,7 +68,6 @@ class EmployeeSkillController extends Controller
                 return ApiResponse::error('This skill is already assigned to the employee.', 422);
             }
 
-            $validated['tenant_id'] = $request->user()->tenant_id;
             $validated['employee_id'] = $employee->id;
 
             $employeeSkill = EmployeeSkill::create($validated);

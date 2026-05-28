@@ -144,7 +144,7 @@ class LeaveApprovalService
             ->first();
 
         if ($balance) {
-            $balance->decrement('pending_approval', (float) $leaveRequest->duration_days);
+            $balance->decrementPending((float) $leaveRequest->duration_days);
         }
 
         // Notify Employee
@@ -202,7 +202,7 @@ class LeaveApprovalService
             ->first();
 
         if ($balance) {
-            $balance->decrement('pending_approval', (float) $leaveRequest->duration_days);
+            $balance->decrementPending((float) $leaveRequest->duration_days);
             $balance->increment('used', (float) $leaveRequest->duration_days);
         }
     }

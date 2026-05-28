@@ -113,10 +113,12 @@ class LeaveAnalyticsController extends Controller
                 $year = $month->year;
                 $monthNum = $month->month;
 
+                $monthStart = $month->copy()->startOfMonth()->format('Y-m-d');
+                $monthEnd = $month->copy()->endOfMonth()->format('Y-m-d');
+
                 $countQuery = LeaveRequest::where('tenant_id', $tenantId)
                     ->where('status', 'approved')
-                    ->whereYear('start_date', $year)
-                    ->whereMonth('start_date', $monthNum);
+                    ->whereBetween('start_date', [$monthStart, $monthEnd]);
 
                 if (!$user->is_hr) {
                     $employee = $user->employee;
@@ -146,9 +148,11 @@ class LeaveAnalyticsController extends Controller
             $tenantId = Auth::user()->tenant_id;
             $year = $request->get('year', now()->year);
 
+            $boundaries = $this->leaveYearService->getLeaveYearBoundaries((int)$year, $tenantId);
+
             $query = LeaveRequest::where('leave_requests.tenant_id', $tenantId)
                 ->where('leave_requests.status', 'approved')
-                ->whereYear('leave_requests.start_date', $year);
+                ->whereBetween('leave_requests.start_date', [$boundaries['start'], $boundaries['end']]);
 
             if ($request->has('department_id')) {
                 $query->whereHas('employee.employmentDetails', function ($q) use ($request) {
@@ -182,8 +186,12 @@ class LeaveAnalyticsController extends Controller
             $byMonth = [];
             for ($m = 1; $m <= 12; $m++) {
                 $monthName = Carbon::create($year, $m, 1)->format('M');
+                $monthBoundaries = [
+                    'start' => Carbon::create($year, $m, 1)->startOfMonth()->format('Y-m-d'),
+                    'end' => Carbon::create($year, $m, 1)->endOfMonth()->format('Y-m-d'),
+                ];
                 $monthDays = (clone $query)
-                    ->whereMonth('leave_requests.start_date', $m)
+                    ->whereBetween('leave_requests.start_date', [$monthBoundaries['start'], $monthBoundaries['end']])
                     ->sum('leave_requests.duration_days');
 
                 $byMonth[] = [
@@ -194,9 +202,11 @@ class LeaveAnalyticsController extends Controller
 
             // Approval Latency (Average hours from applied_at to final approval)
             // We use the last actioned_at from leave_approvals for each approved request
+            $latencyBoundaries = $this->leaveYearService->getLeaveYearBoundaries((int)$year, $tenantId);
+
             $latencyQuery = LeaveRequest::where('leave_requests.tenant_id', $tenantId)
                 ->where('leave_requests.status', 'approved')
-                ->whereYear('leave_requests.start_date', $year);
+                ->whereBetween('leave_requests.start_date', [$latencyBoundaries['start'], $latencyBoundaries['end']]);
 
             if ($request->has('department_id')) {
                 $latencyQuery->whereHas('employee.employmentDetails', function ($q) use ($request) {
@@ -259,9 +269,10 @@ class LeaveAnalyticsController extends Controller
 
             // Cancellation Stats
             $approvedCount = (clone $query)->where('status', 'approved')->count();
+            $cancelledBoundaries = $this->leaveYearService->getLeaveYearBoundaries((int)$year, $tenantId);
             $cancelledCount = LeaveRequest::where('tenant_id', $tenantId)
                 ->where('status', 'cancelled')
-                ->whereYear('start_date', $year);
+                ->whereBetween('start_date', [$cancelledBoundaries['start'], $cancelledBoundaries['end']]);
 
             if ($request->has('department_id')) {
                 $cancelledCount->whereHas('employee.employmentDetails', function ($q) use ($request) {
@@ -454,11 +465,12 @@ class LeaveAnalyticsController extends Controller
             $tenantId = Auth::user()->tenant_id;
             $year = $request->get('year', date('Y'));
 
+            $absentBoundaries = $this->leaveYearService->getLeaveYearBoundaries((int)$year, $tenantId);
             // Focus on Sick Leave or all short-term leaves (< 3 days)
             $query = LeaveRequest::with(['employee.employmentDetails.department', 'leaveType'])
                 ->where('tenant_id', $tenantId)
                 ->where('status', 'approved')
-                ->whereYear('start_date', $year);
+                ->whereBetween('start_date', [$absentBoundaries['start'], $absentBoundaries['end']]);
 
             if ($request->has('department_id')) {
                 $query->whereHas('employee.employmentDetails', function ($q) use ($request) {
@@ -508,10 +520,11 @@ class LeaveAnalyticsController extends Controller
             $tenantId = Auth::user()->tenant_id;
             $year = $request->get('year', date('Y'));
 
+            $latencyRepBoundaries = $this->leaveYearService->getLeaveYearBoundaries((int)$year, $tenantId);
             $requests = LeaveRequest::with(['employee.employmentDetails.department', 'approvals.approver.employee'])
                 ->where('tenant_id', $tenantId)
                 ->where('status', 'approved')
-                ->whereYear('applied_at', $year)
+                ->whereBetween('applied_at', [$latencyRepBoundaries['start'], $latencyRepBoundaries['end']])
                 ->get();
 
             $data = $requests->map(function ($r) {

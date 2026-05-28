@@ -60,6 +60,6 @@ class EmployeeSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $this->command->info('Employees seeded successfully!');
+        $this->command?->info('Employees seeded successfully!');
     }
 }

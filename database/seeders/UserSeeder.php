@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
             'tenant_id' => 1, // Default tenant
         ]);
 
-        $this->command->info('Users seeded successfully!');
+        $this->command?->info('Users seeded successfully!');
     }
 }

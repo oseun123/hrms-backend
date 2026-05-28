@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Preference\Preference;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -25,13 +27,26 @@ class AuthController extends Controller
             'tenant_id' => 'required|exists:tenants,id',
         ]);
 
+        $throttleKey = Str::lower($request->input('email')) . '|' . $request->ip();
+
+        if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+            return ApiResponse::error(
+                "Too many login attempts. Please try again in {$seconds} seconds.",
+                429
+            );
+        }
+
         $user = User::where('email', $request->email)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
+            RateLimiter::hit($throttleKey);
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+
+        RateLimiter::clear($throttleKey);
 
         // Verify user has access to this tenant
         // For now, we check if user's primary tenant matches or if tenant is active
@@ -99,8 +114,7 @@ class AuthController extends Controller
             ], 'Verification code sent to your email');
         }
 
-        // Check if this is a new device (not seen before for this user/IP combo)
-        $isNewDevice = ! $user->tokens()
+        $isNewDevice = !$user->knownDevices()
             ->where('ip_address', $request->ip())
             ->where('user_agent', $request->userAgent())
             ->exists();
@@ -114,14 +128,26 @@ class AuthController extends Controller
         // Create tenant-scoped token
         $token = $user->createToken('auth-token', ['*'], $request->tenant_id);
 
-        // Notify if new device
-        if ($isNewDevice) {
-            try {
-                $deviceName = parse_user_agent($request->userAgent());
+        // Update or Create known device record
+        try {
+            $deviceName = parse_user_agent($request->userAgent());
+            $user->knownDevices()->updateOrCreate(
+                [
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                ],
+                [
+                    'device_name' => $deviceName,
+                    'last_login_at' => now(),
+                ]
+            );
+
+            // Notify if new device
+            if ($isNewDevice) {
                 $user->notify(new \App\Notifications\NewDeviceLoginNotification($deviceName, $request->ip()));
-            } catch (\Exception $e) {
-                Log::error('Failed to send new device notification: ' . $e->getMessage());
             }
+        } catch (\Exception $e) {
+            Log::error('Failed to update known device or send notification: ' . $e->getMessage());
         }
 
         // Update last login - preserve previous login time
@@ -169,7 +195,7 @@ class AuthController extends Controller
         ]);
 
         // Check if this is a new device (not seen before for this user/IP combo)
-        $isNewDevice = ! $user->tokens()
+        $isNewDevice = !$user->knownDevices()
             ->where('ip_address', $request->ip())
             ->where('user_agent', $request->userAgent())
             ->exists();
@@ -183,14 +209,26 @@ class AuthController extends Controller
         // Create tenant-scoped token
         $token = $user->createToken('auth-token', ['*'], $request->tenant_id);
 
-        // Notify if new device
-        if ($isNewDevice) {
-            try {
-                $deviceName = parse_user_agent($request->userAgent());
+        // Update or Create known device record
+        try {
+            $deviceName = parse_user_agent($request->userAgent());
+            $user->knownDevices()->updateOrCreate(
+                [
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent(),
+                ],
+                [
+                    'device_name' => $deviceName,
+                    'last_login_at' => now(),
+                ]
+            );
+
+            // Notify if new device
+            if ($isNewDevice) {
                 $user->notify(new \App\Notifications\NewDeviceLoginNotification($deviceName, $request->ip()));
-            } catch (\Exception $e) {
-                Log::error('Failed to send new device notification: ' . $e->getMessage());
             }
+        } catch (\Exception $e) {
+            Log::error('Failed to update known device or send notification: ' . $e->getMessage());
         }
 
         // Update last login - preserve previous login time
@@ -376,11 +414,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-
-        // Update last_login to 'now' right before logout to capture 'Last Seen' time
-        $user->update([
-            'last_login' => now(),
-        ]);
 
         // Revoke current token
         $user->currentAccessToken()->delete();

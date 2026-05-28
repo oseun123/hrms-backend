@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \App\Http\Middleware\SecurityHeaders::class,
     ];
 
     /**
@@ -41,7 +42,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            // 'throttle:api',
+            'throttle:api',
             \App\Http\Middleware\InjectTenantId::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -66,5 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'approval' => \App\Http\Middleware\CheckApprovalRequired::class,
         'permission' => \App\Http\Middleware\CheckPermission::class,
+        'auth.super-admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
+        'track.first.login' => \App\Http\Middleware\TrackFirstLogin::class,
     ];
 }

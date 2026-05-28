@@ -47,6 +47,30 @@ class PermissionSeeder extends Seeder
             ['name' => 'Leave: Department Calendar', 'slug' => 'leave.dept_calendar'],
             ['name' => 'Leave: Reports', 'slug' => 'leave.reports'],
             ['name' => 'Leave: Balances', 'slug' => 'leave.balances'],
+
+            // Payroll Management
+            ['name' => 'Payroll: Dashboard', 'slug' => 'payroll.dashboard'],
+            ['name' => 'Payroll: Monthly Processing', 'slug' => 'payroll.processing'],
+            ['name' => 'Payroll: Leave Allowances', 'slug' => 'payroll.leave_allowances'],
+            ['name' => 'Payroll: Annual Structures', 'slug' => 'payroll.annual_structures'],
+            ['name' => 'Payroll: Configuration', 'slug' => 'payroll.setup'],
+            ['name' => 'Payroll: Reports', 'slug' => 'payroll.reports'],
+
+            // Performance Management
+            ['name' => 'Performance: Dashboard', 'slug' => 'performance.dashboard'],
+            ['name' => 'Performance: Configuration', 'slug' => 'performance.setup'],
+            ['name' => 'Performance: My Deliverables / Appraisal', 'slug' => 'performance.my_deliverables'],
+            ['name' => 'Performance: Team Deliverables', 'slug' => 'performance.team_deliverables'],
+            ['name' => 'Performance: Employee Deliverables', 'slug' => 'performance.employee_deliverables'],
+            ['name' => 'Performance: Appraisal Management', 'slug' => 'performance.appraisal_management'],
+            ['name' => 'Performance: Reports', 'slug' => 'performance.reports'],
+
+            // Request Management
+            ['name' => 'Requests: Dashboard', 'slug' => 'requests.dashboard'],
+            ['name' => 'Requests: Templates', 'slug' => 'requests.templates'],
+            ['name' => 'Requests: Approvals', 'slug' => 'requests.approvals'],
+            ['name' => 'Requests: Configuration', 'slug' => 'requests.configuration'],
+            ['name' => 'Requests: Reports', 'slug' => 'requests.reports'],
         ];
 
         foreach ($permissions as $permission) {
@@ -88,7 +112,12 @@ class PermissionSeeder extends Seeder
             'dashboard.personal',
             'preferences.privacy_security',
             'leave.dashboard',
-            'leave.dept_calendar'
+            'leave.dept_calendar',
+            'payroll.dashboard',
+            'performance.dashboard',
+            'performance.my_deliverables',
+            'requests.dashboard',
+            'requests.templates',
         ])->get();
 
         $employeeRole->permissions()->sync($employeePermissions);

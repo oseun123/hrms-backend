@@ -3,56 +3,75 @@
 namespace Database\Seeders;
 
 use App\Models\Hris\Level;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class LevelSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+    protected ?User $adminUser = null;
+
+    public function __construct(?Tenant $tenant = null, ?User $adminUser = null)
+    {
+        $this->tenant = $tenant;
+        $this->adminUser = $adminUser;
+    }
+
     public function run(): void
     {
-        $tenantId = 1;
-        $adminUser = User::where('email', 'admin@hrms.local')->first();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
-        Level::create([
-            'tenant_id' => $tenantId,
-            'code' => 'JR',
-            'name' => 'Junior',
-            'description' => 'Junior Level',
-            'rank' => 1,
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+        foreach ($tenants as $tenant) {
+            $adminUser = $this->adminUser ?? User::where('tenant_id', $tenant->id)->first() ?? User::where('email', 'admin@hrms.local')->first();
 
-        Level::create([
-            'tenant_id' => $tenantId,
-            'code' => 'MID',
-            'name' => 'Mid-Level',
-            'description' => 'Mid-Level',
-            'rank' => 2,
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            if (!$adminUser) {
+                continue;
+            }
 
-        Level::create([
-            'tenant_id' => $tenantId,
-            'code' => 'SR',
-            'name' => 'Senior',
-            'description' => 'Senior Level',
-            'rank' => 3,
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            Level::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'JR'],
+                [
+                    'name' => 'Junior',
+                    'description' => 'Junior Level',
+                    'rank' => 1,
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
 
-        Level::create([
-            'tenant_id' => $tenantId,
-            'code' => 'LEAD',
-            'name' => 'Lead',
-            'description' => 'Team Lead',
-            'rank' => 4,
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            Level::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'MID'],
+                [
+                    'name' => 'Mid-Level',
+                    'description' => 'Mid-Level',
+                    'rank' => 2,
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
 
-        $this->command->info('Levels seeded successfully!');
+            Level::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'SR'],
+                [
+                    'name' => 'Senior',
+                    'description' => 'Senior Level',
+                    'rank' => 3,
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
+
+            Level::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'LEAD'],
+                [
+                    'name' => 'Lead',
+                    'description' => 'Team Lead',
+                    'rank' => 4,
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
+        }
     }
 }

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PasswordResetController extends Controller
@@ -24,17 +25,22 @@ class PasswordResetController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (! $user) {
-            return ApiResponse::notFound('We could not find a user with that email address.');
+            // Log for internal tracking but return success to prevent enumeration
+            Log::info('Password reset requested for non-existent email', ['email' => $request->email]);
+            return ApiResponse::success(['email' => $request->email], 'If that email exists in our system, you will receive a password reset link.');
         }
 
         // Generate reset token
         $token = Str::random(64);
 
+        // Map tenant_id from user
+        $tenantId = $user->tenant_id;
+
         // Store token in password_reset_tokens table
         DB::table('password_reset_tokens')->updateOrInsert(
             ['email' => $request->email],
             [
-                'tenant_id' => 1, // Default tenant for now, will be dynamic with multi-tenancy
+                'tenant_id' => $tenantId,
                 'user_id' => $user->id,
                 'email' => $request->email,
                 'token' => Hash::make($token),

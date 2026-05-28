@@ -36,12 +36,8 @@ trait HasTenantBranding
         $appName = config('app.name');
         $companyName = $branding['name'] ?? $appName;
 
-        // Set From address if HR email is available
-        if ($branding['hr_email']) {
-            $mailMessage->from($branding['hr_email'], $companyName);
-        } elseif ($branding['name']) {
-            $mailMessage->from(config('mail.from.address'), $companyName);
-        }
+        // Set From address using the global config address, keeping the company name
+        $mailMessage->from(config('mail.from.address'), $companyName);
 
         // Set Salutation/Regards
         $mailMessage->salutation('Regards, ' . ($branding['name'] ? $branding['name'] : $appName . ' Team'));

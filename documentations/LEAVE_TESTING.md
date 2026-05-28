@@ -101,6 +101,7 @@ Base URL: `http://localhost:8000/api/leave`
 - `POST /requests`
 - **Type**: `multipart/form-data`
 - **Fields**: `employee_id`, `leave_type_id`, `start_date`, `end_date`, `reason`, `attachment` (File).
+- **Optional Field**: `request_leave_allowance` (boolean/integer 1) - Requests annual leave allowance payout (only valid for 5+ days of Annual Leave).
 
 ### Details & Management
 
@@ -215,3 +216,127 @@ Base URL: `http://localhost:8000/api/leave`
 - **Approver Latency**: `GET /analytics/latency-report` (Efficiency tracking for the approval workflow)
 - **Conflict & Overlap**: `GET /analytics/conflict-report` (Early warning for dates with multiple staff members away in the same team)
 - **Active Leaves**: `GET /analytics/active-leaves` (Who is on leave today?)
+
+---
+
+## 6. Leave Group Assignments
+
+### 1. List Assignments
+
+**URL**: `GET /group-assignments`
+
+**Purpose**: List employees and their assigned leave groups.
+
+### 2. Manual Assignment
+
+**URL**: `POST /group-assignments/assign`
+
+**Body**: `{ "employee_id": 1, "leave_group_id": 1 }`
+
+### 3. Bulk Assignment
+
+**URL**: `POST /group-assignments/bulk-assign`
+
+**Body**:
+
+```json
+{
+    "employee_ids": [1, 2, 3],
+    "leave_group_id": 1
+}
+```
+
+---
+
+## 7. Year-End Processing
+
+### Get Year-End Status
+
+**Endpoint**: `GET /year-end/status`
+
+**Purpose**: Get information about the current leave year and whether year-end rollover has been processed.
+
+**Response**:
+
+```json
+{
+    "success": true,
+    "data": {
+        "current_year": 2026,
+        "next_year": 2027,
+        "year_start_date": "2026-01-01",
+        "year_end_date": "2026-12-31",
+        "year_label": "2026",
+        "is_processed": false,
+        "processing_info": null
+    }
+}
+```
+
+**If Already Processed**:
+
+```json
+{
+    "success": true,
+    "data": {
+        "current_year": 2026,
+        "next_year": 2027,
+        "year_start_date": "2026-01-01",
+        "year_end_date": "2026-12-31",
+        "year_label": "2026",
+        "is_processed": true,
+        "processing_info": {
+            "processed_at": "2026-12-31T23:59:00.000000Z",
+            "processed_by": "Admin User",
+            "employees_processed": 150
+        }
+    }
+}
+```
+
+### Process Year-End Rollover
+
+**Endpoint**: `POST /year-end/process`
+
+**Purpose**: Trigger year-end rollover to carry forward unused leave balances and create fresh entitlements for the new leave year.
+
+**Request**: No body required
+
+**Response**:
+
+```json
+{
+    "success": true,
+    "message": "Year-end rollover completed successfully",
+    "data": {
+        "employees_processed": 150,
+        "from_year": 2026,
+        "to_year": 2027
+    }
+}
+```
+
+**Error (Already Processed)**:
+
+```json
+{
+    "success": false,
+    "message": "Year-end for 2026 has already been processed. Cannot process again."
+}
+```
+
+**What Happens During Year-End Processing**:
+
+1. For each employee with a leave group:
+    - For each active leave policy in their group:
+        - Carry forward unused balance (up to `max_carry_forward_days` if `allow_carry_forward` is true)
+        - Create new balance record for the next year with fresh entitlement
+2. Records processing details in `leave_year_end_processing` table
+3. Prevents duplicate processing with unique constraint
+
+**Important Notes**:
+
+- Year-end processing can only be run once per leave year
+- The current leave year is automatically calculated based on the configured leave year start month
+- Processing is tenant-specific and affects all employees in the tenant
+- Audit trail is maintained showing who processed it and when

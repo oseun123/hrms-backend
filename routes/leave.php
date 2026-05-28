@@ -57,4 +57,10 @@ Route::prefix('leave')->group(function () {
     Route::get('group-assignments', [LeaveGroupAssignmentController::class, 'index']);
     Route::post('group-assignments/assign', [LeaveGroupAssignmentController::class, 'assign']);
     Route::post('group-assignments/bulk-assign', [LeaveGroupAssignmentController::class, 'bulkAssign']);
+
+    // Year-End Processing
+    Route::prefix('year-end')->group(function () {
+        Route::get('status', [App\Http\Controllers\Leave\LeaveYearEndController::class, 'status']);
+        Route::post('process', [App\Http\Controllers\Leave\LeaveYearEndController::class, 'process']);
+    });
 });

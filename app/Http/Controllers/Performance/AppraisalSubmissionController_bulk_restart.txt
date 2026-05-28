@@ -1,0 +1,73 @@
+    /**
+     * Bulk restart appraisal submissions
+     */
+    public function bulkRestart(Request $request)
+    {
+        try {
+            $request->validate([
+                'submission_ids' => 'required|array',
+                'submission_ids.*' => 'required|integer',
+            ]);
+
+            $tenantId = Auth::user()->tenant_id;
+            $submissionIds = $request->submission_ids;
+
+            $submissions = AppraisalSubmission::where('tenant_id', $tenantId)
+                ->with('appraisal')
+                ->whereIn('id', $submissionIds)
+                ->get();
+
+            if ($submissions->isEmpty()) {
+                return ApiResponse::error('No submissions found', 404);
+            }
+
+            $restarted = 0;
+            $failed = 0;
+            $errors = [];
+
+            foreach ($submissions as $submission) {
+                // Validate that the appraisal is active
+                if ($submission->appraisal->status !== 'active') {
+                    $failed++;
+                    $errors[] = "Submission ID {$submission->id}: Appraisal is not active";
+                    continue;
+                }
+
+                try {
+                    // Delete all level scores for this submission
+                    AppraisalLevelScore::where('submission_id', $submission->id)->delete();
+
+                    // Delete all goal scores
+                    AppraisalGoalScore::whereHas('levelScore', function ($query) use ($submission) {
+                        $query->where('submission_id', $submission->id);
+                    })->delete();
+
+                    // Delete all competency scores
+                    AppraisalCompetencyScore::whereHas('levelScore', function ($query) use ($submission) {
+                        $query->where('submission_id', $submission->id);
+                    })->delete();
+
+                    // Reset submission to initial state
+                    $submission->update([
+                        'current_level' => 1,
+                        'status' => 'pending',
+                        'submitted_at' => null,
+                        'completed_at' => null,
+                    ]);
+
+                    $restarted++;
+                } catch (\Exception $e) {
+                    $failed++;
+                    $errors[] = "Submission ID {$submission->id}: {$e->getMessage()}";
+                }
+            }
+
+            return ApiResponse::success([
+                'restarted' => $restarted,
+                'failed' => $failed,
+                'errors' => $errors,
+            ], "{$restarted} submission(s) restarted successfully" . ($failed > 0 ? ", {$failed} failed" : ''));
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'bulk restarting submissions');
+        }
+    }

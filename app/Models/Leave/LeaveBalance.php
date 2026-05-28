@@ -37,6 +37,14 @@ class LeaveBalance extends BaseModel
         'manual_adjustment' => 'decimal:2',
     ];
 
+    /**
+     * Ensure pending_approval attribute is never negative when accessed.
+     */
+    public function getPendingApprovalAttribute($value)
+    {
+        return max(0, (float)$value);
+    }
+
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
@@ -62,6 +70,27 @@ class LeaveBalance extends BaseModel
             (float)($this->accrued ?? 0) +
             (float)($this->manual_adjustment ?? 0);
 
-        return $total - (float)($this->used ?? 0) - (float)($this->pending_approval ?? 0);
+        $used = (float)($this->used ?? 0);
+
+        // Per user request: Available should be Total - Used (Pending is shown separately)
+        return $total - $used;
+    }
+
+    /**
+     * Safely decrement pending_approval, ensuring it doesn't go below zero.
+     */
+    public function decrementPending(float $amount)
+    {
+        $this->pending_approval = max(0, (float)$this->pending_approval - $amount);
+        return $this->save();
+    }
+
+    /**
+     * Safely decrement used balance, ensuring it doesn't go below zero.
+     */
+    public function decrementUsed(float $amount)
+    {
+        $this->used = max(0, (float)$this->used - $amount);
+        return $this->save();
     }
 }

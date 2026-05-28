@@ -8,13 +8,20 @@ use Illuminate\Database\Seeder;
 
 class PublicHolidaySeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeder.
      * Seeds common Nigerian public holidays for all tenants
      */
     public function run(): void
     {
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         // Define 2025 public holidays
         $holidays = [
@@ -98,6 +105,6 @@ class PublicHolidaySeeder extends Seeder
             }
         }
 
-        $this->command->info('Public holidays seeded successfully for all tenants.');
+        $this->command?->info('Public holidays seeded successfully for all tenants.');
     }
 }

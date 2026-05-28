@@ -59,12 +59,13 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         try {
+            $tenantId = $request->user()->tenant_id;
             $validated = $request->validate([
-                'parent_id' => 'nullable|exists:departments,id',
+                'parent_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
                 'code' => 'required|string|max:50|unique:departments,code',
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'manager_id' => 'nullable|exists:employees,id',
+                'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
                 'cost_center' => 'nullable|string|max:100',
                 'location' => 'nullable|string|max:255',
                 'email' => 'nullable|email|max:255',
@@ -72,7 +73,7 @@ class DepartmentController extends Controller
                 'is_active' => 'boolean',
             ]);
 
-            $validated['tenant_id'] = $request->user()->tenant_id;
+            $validated['tenant_id'] = $tenantId;
             $validated['created_by'] = auth()->id();
 
             $department = Department::create($validated);
@@ -91,9 +92,16 @@ class DepartmentController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $department = Department::with(['parent', 'manager', 'children', 'employees', 'positions'])
+            $department = Department::with(['parent', 'manager', 'children', 'positions'])
                 ->where('tenant_id', $request->user()->tenant_id)
                 ->findOrFail($id);
+
+            // Fetch employees in this department with required relations
+            $employees = \App\Models\Hris\Employee::whereHas('employmentDetails', function ($query) use ($id) {
+                $query->where('department_id', $id);
+            })->with(['user', 'employmentDetails.position', 'employmentDetails.department'])->get();
+
+            $department->setRelation('employees', $employees);
 
             return ApiResponse::success($department);
         } catch (ModelNotFoundException $e) {
@@ -106,15 +114,16 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $department = Department::where('tenant_id', $request->user()->tenant_id)
+            $tenantId = $request->user()->tenant_id;
+            $department = Department::where('tenant_id', $tenantId)
                 ->findOrFail($id);
 
             $validated = $request->validate([
-                'parent_id' => 'nullable|exists:departments,id',
+                'parent_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
                 'code' => 'required|string|max:50|unique:departments,code,' . $id,
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'manager_id' => 'nullable|exists:employees,id',
+                'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
                 'cost_center' => 'nullable|string|max:100',
                 'location' => 'nullable|string|max:255',
                 'email' => 'nullable|email|max:255',

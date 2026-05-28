@@ -39,7 +39,12 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Employee::with(['user.roles', 'employmentDetails.department', 'employmentDetails.position', 'employmentDetails.leaveGroup'])
+        $query = Employee::with([
+            'user',
+            'employmentDetails.department',
+            'employmentDetails.position',
+            'employmentDetails.leaveGroup'
+        ])
             ->where('tenant_id', $request->user()->tenant_id);
 
         // Filter by department
@@ -143,6 +148,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        $tenantId = $request->user()->tenant_id;
         $validated = $request->validate([
             'employee_number' => 'nullable|string|max:50|unique:employees,employee_number',
             'first_name' => 'required|string|max:100',
@@ -161,11 +167,11 @@ class EmployeeController extends Controller
             // Employment details (nested)
             'employment_details' => 'nullable|array',
             'employment_details.work_email' => 'nullable|email',
-            'employment_details.department_id' => 'nullable|exists:departments,id',
-            'employment_details.position_id' => 'nullable|exists:positions,id',
-            'employment_details.manager_id' => 'nullable|exists:employees,id',
-            'employment_details.team_lead_id' => 'nullable|exists:employees,id',
-            'employment_details.secondary_manager_id' => 'nullable|exists:employees,id',
+            'employment_details.department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'employment_details.position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
+            'employment_details.manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'employment_details.team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'employment_details.secondary_manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'employment_details.employment_type' => 'nullable|string',
             'employment_details.employment_status' => 'nullable|string',
             'employment_details.hire_date' => 'nullable|date',
@@ -182,12 +188,11 @@ class EmployeeController extends Controller
             'employment_details.work_schedule' => 'nullable|string',
             'employment_details.shift' => 'nullable|string',
             'employment_details.remote_work_eligible' => 'nullable|boolean',
-            'employment_details.leave_group_id' => 'nullable|exists:leave_groups,id',
+            'employment_details.leave_group_id' => 'nullable|exists:leave_groups,id,tenant_id,' . $tenantId,
         ]);
 
         DB::beginTransaction();
         $email = $validated['email'];
-        $tenantId = $request->user()->tenant_id;
         $isNewUserCreated = false;
 
         try {
@@ -445,7 +450,7 @@ class EmployeeController extends Controller
      */
     public function createEmploymentDetails(Request $request, Employee $employee)
     {
-
+        $tenantId = $request->user()->tenant_id;
         // Check if employment details already exist
         if ($employee->employmentDetails) {
             return response()->json([
@@ -456,11 +461,11 @@ class EmployeeController extends Controller
 
         $validated = $request->validate([
             'work_email' => 'nullable|email',
-            'department_id' => 'nullable|exists:departments,id',
-            'position_id' => 'nullable|exists:positions,id',
-            'manager_id' => 'nullable|exists:employees,id',
-            'team_lead_id' => 'nullable|exists:employees,id',
-            'secondary_manager_id' => 'nullable|exists:employees,id',
+            'department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
+            'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'secondary_manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'employment_type' => 'nullable|string',
             'employment_status' => 'nullable|string',
             'hire_date' => 'nullable|date',
@@ -477,7 +482,7 @@ class EmployeeController extends Controller
             'work_schedule' => 'nullable|string',
             'shift' => 'nullable|string',
             'remote_work_eligible' => 'nullable|boolean',
-            'leave_group_id' => 'nullable|exists:leave_groups,id',
+            'leave_group_id' => 'nullable|exists:leave_groups,id,tenant_id,' . $tenantId,
         ]);
 
         $employmentDetails = EmployeeEmploymentDetail::create(array_merge(
@@ -541,6 +546,7 @@ class EmployeeController extends Controller
      */
     public function updateEmploymentDetails(Request $request, Employee $employee)
     {
+        $tenantId = $request->user()->tenant_id;
         $employmentDetails = $employee->employmentDetails;
 
         if (! $employmentDetails) {
@@ -552,11 +558,11 @@ class EmployeeController extends Controller
 
         $validated = $request->validate([
             'work_email' => 'nullable|email',
-            'department_id' => 'nullable|exists:departments,id',
-            'position_id' => 'nullable|exists:positions,id',
-            'manager_id' => 'nullable|exists:employees,id',
-            'team_lead_id' => 'nullable|exists:employees,id',
-            'secondary_manager_id' => 'nullable|exists:employees,id',
+            'department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
+            'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
+            'secondary_manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'employment_type' => 'nullable|string',
             'employment_status' => 'nullable|string',
             'hire_date' => 'nullable|date',
@@ -573,7 +579,7 @@ class EmployeeController extends Controller
             'work_schedule' => 'nullable|string',
             'shift' => 'nullable|string',
             'remote_work_eligible' => 'nullable|boolean',
-            'leave_group_id' => 'nullable|exists:leave_groups,id',
+            'leave_group_id' => 'nullable|exists:leave_groups,id,tenant_id,' . $tenantId,
         ]);
 
         $employmentDetails->update($validated);

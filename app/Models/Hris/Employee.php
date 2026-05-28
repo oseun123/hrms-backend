@@ -165,6 +165,12 @@ class Employee extends BaseModel
         return $this->hasOne(EmployeeOnboardingStatus::class);
     }
 
+    public function payGroups()
+    {
+        return $this->belongsToMany(\App\Models\Payroll\PayGroup::class, 'payroll_employee_pay_groups', 'employee_id', 'pay_group_id')
+            ->withPivot('wage_item_id');
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');

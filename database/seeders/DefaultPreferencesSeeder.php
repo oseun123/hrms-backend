@@ -8,13 +8,20 @@ use Illuminate\Database\Seeder;
 
 class DefaultPreferencesSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeder.
      * Seeds default preferences for all tenants
      */
     public function run(): void
     {
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             // Set default theme color to Geek Blue
@@ -89,9 +96,9 @@ class DefaultPreferencesSeeder extends Seeder
                 );
             }
 
-            $this->command->info("Default preferences set for tenant: {$tenant->name}");
+            $this->command?->info("Default preferences set for tenant: {$tenant->name}");
         }
 
-        $this->command->info('Default preferences seeded successfully for all tenants.');
+        $this->command?->info('Default preferences seeded successfully for all tenants.');
     }
 }

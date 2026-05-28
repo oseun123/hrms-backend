@@ -26,6 +26,9 @@ Route::prefix('auth')->group(function () {
 // Public tenant lookup
 Route::get('/tenants/{slug}', [App\Http\Controllers\TenantController::class, 'getBySlug']);
 
+// Public demo request (landing page form — no auth required)
+Route::post('/demo-request', [App\Http\Controllers\DemoRequestController::class, 'store']);
+
 // Protected routes
 Route::middleware(['auth:sanctum', 'track.first.login'])->group(function () {
 
@@ -56,6 +59,15 @@ Route::middleware(['auth:sanctum', 'track.first.login'])->group(function () {
 
     // Leave Module routes
     require __DIR__ . '/leave.php';
+
+    // Payroll Module routes
+    require __DIR__ . '/payroll.php';
+
+    // Performance Module routes
+    require __DIR__ . '/performance.php';
+
+    // Request Module routes
+    require __DIR__ . '/requests.php';
 
     /*
     // Approval routes - Will be enabled after creating ApprovalController

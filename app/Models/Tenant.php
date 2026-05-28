@@ -10,15 +10,21 @@ use App\Models\Hris\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 
-class Tenant extends BaseModel
+class Tenant extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $fillable = [
         'name',
         'slug',
         'domain',
+        'contact_email',
+        'plan',
+        'max_users',
+        'trial_ends_at',
+        'notes',
         'is_active',
         'settings',
     ];
@@ -116,5 +122,15 @@ class Tenant extends BaseModel
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->contact_email;
     }
 }

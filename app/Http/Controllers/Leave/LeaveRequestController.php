@@ -16,6 +16,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Notifications\LeaveRequestCancelled;
+use App\Notifications\LeaveAllowanceRequestNotification;
+use App\Models\Payroll\LeaveAllowanceRequest as LeaveAllowanceRequestModel;
+use App\Models\Payroll\AnnualSalaryStructure;
+use App\Models\User;
 use Illuminate\Support\Facades\Notification;
 
 class LeaveRequestController extends Controller
@@ -76,12 +80,13 @@ class LeaveRequestController extends Controller
             $tenantId = $user->tenant_id;
 
             $validated = $request->validate([
-                'employee_id' => 'required|exists:employees,id',
-                'leave_type_id' => 'required|exists:leave_types,id',
+                'employee_id' => 'required|exists:employees,id,tenant_id,' . $tenantId,
+                'leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
                 'start_date' => 'required|date',
                 'end_date' => 'required|date|after_or_equal:start_date',
                 'reason' => 'nullable|string',
                 'attachment' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'request_leave_allowance' => 'nullable|boolean',
             ]);
 
             // Check if leave type requires attachment
@@ -180,43 +185,51 @@ class LeaveRequestController extends Controller
                 $attachmentPath = $uploadResult['path'];
             }
 
-            $leaveRequest = LeaveRequest::create([
-                'tenant_id' => $tenantId,
-                'employee_id' => $validated['employee_id'],
-                'leave_type_id' => $validated['leave_type_id'],
-                'start_date' => $validated['start_date'],
-                'end_date' => $validated['end_date'],
-                'duration_days' => $duration,
-                'reason' => $validated['reason'],
-                'attachment_path' => $attachmentPath,
-                'status' => 'pending',
-                'applied_at' => now(),
-            ]);
-
-            // Update pending_approval balance
-            if ($balance->exists) {
-                $balance->increment('pending_approval', $duration);
-            } else {
-                // Create the balance record if it doesn't exist
-                LeaveBalance::create([
+            return DB::transaction(function () use ($tenantId, $validated, $attachmentPath, $employee, $policy, $leaveYear, $duration, $balance, $leaveType) {
+                $leaveRequest = LeaveRequest::create([
                     'tenant_id' => $tenantId,
                     'employee_id' => $validated['employee_id'],
                     'leave_type_id' => $validated['leave_type_id'],
-                    'year' => $leaveYear,
-                    'entitlement' => (float) $policy->entitlement_days,
-                    'carried_forward' => 0,
-                    'accrued' => 0,
-                    'used' => 0,
-                    'pending_approval' => $duration,
-                    'manual_adjustment' => 0,
+                    'start_date' => $validated['start_date'],
+                    'end_date' => $validated['end_date'],
+                    'duration_days' => $duration,
+                    'reason' => $validated['reason'],
+                    'attachment_path' => $attachmentPath,
+                    'status' => 'pending',
+                    'applied_at' => now(),
+                    'request_leave_allowance' => $validated['request_leave_allowance'] ?? false,
                 ]);
-            }
 
-            // Initialize Approval Chain
-            $approvalService = app(\App\Services\Leave\LeaveApprovalService::class);
-            $approvalService->initializeApprovalChain($leaveRequest, $policy);
+                // Handle Leave Allowance Request if requested
+                if (!empty($validated['request_leave_allowance']) && $duration >= 5) {
+                    $this->processLeaveAllowanceRequest($leaveRequest, $employee, $leaveType, $leaveYear, $tenantId);
+                }
 
-            return ApiResponse::success($leaveRequest, 'Leave request submitted successfully', 201);
+                // Update pending_approval balance
+                if ($balance->exists) {
+                    $balance->increment('pending_approval', $duration);
+                } else {
+                    // Create the balance record if it doesn't exist
+                    LeaveBalance::create([
+                        'tenant_id' => $tenantId,
+                        'employee_id' => $validated['employee_id'],
+                        'leave_type_id' => $validated['leave_type_id'],
+                        'year' => $leaveYear,
+                        'entitlement' => (float) $policy->entitlement_days,
+                        'carried_forward' => 0,
+                        'accrued' => 0,
+                        'used' => 0,
+                        'pending_approval' => $duration,
+                        'manual_adjustment' => 0,
+                    ]);
+                }
+
+                // Initialize Approval Chain
+                $approvalService = app(\App\Services\Leave\LeaveApprovalService::class);
+                $approvalService->initializeApprovalChain($leaveRequest, $policy);
+
+                return ApiResponse::success($leaveRequest, 'Leave request submitted successfully', 201);
+            });
         } catch (\Exception $e) {
             return $this->handleException($e, 'submitting leave request');
         }
@@ -248,7 +261,7 @@ class LeaveRequestController extends Controller
             }
 
             $validated = $request->validate([
-                'leave_type_id' => 'required|exists:leave_types,id',
+                'leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
                 'start_date' => 'required|date',
                 'end_date' => 'required|date|after_or_equal:start_date',
                 'reason' => 'nullable|string',
@@ -314,9 +327,9 @@ class LeaveRequestController extends Controller
 
             if ($balance) {
                 if ($leaveRequest->status === 'approved') {
-                    $balance->decrement('used', (float) $leaveRequest->duration_days);
+                    $balance->decrementUsed((float) $leaveRequest->duration_days);
                 } elseif ($leaveRequest->status === 'pending') {
-                    $balance->decrement('pending_approval', (float) $leaveRequest->duration_days);
+                    $balance->decrementPending((float) $leaveRequest->duration_days);
                 }
             }
 
@@ -418,7 +431,7 @@ class LeaveRequestController extends Controller
                         ->where('year', Carbon::parse($leaveRequest->start_date)->year)
                         ->first();
                     if ($balance) {
-                        $balance->decrement('pending_approval', (float) $leaveRequest->duration_days);
+                        $balance->decrementPending((float) $leaveRequest->duration_days);
                     }
                 }
 
@@ -455,7 +468,47 @@ class LeaveRequestController extends Controller
             ->first();
 
         if ($balance) {
-            $balance->decrement('used', (float) $leaveRequest->duration_days);
+            $balance->decrementUsed((float) $leaveRequest->duration_days);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+            $tenantId = Auth::user()->tenant_id;
+            $leaveRequest = LeaveRequest::where('tenant_id', $tenantId)->findOrFail($id);
+
+            // Revert balance if it was approved or pending
+            if (in_array($leaveRequest->status, ['approved', 'pending'])) {
+                $balance = LeaveBalance::where('employee_id', $leaveRequest->employee_id)
+                    ->where('leave_type_id', $leaveRequest->leave_type_id)
+                    ->where('year', Carbon::parse($leaveRequest->start_date)->year)
+                    ->first();
+
+                if ($balance) {
+                    if ($leaveRequest->status === 'approved') {
+                        $balance->decrementUsed((float) $leaveRequest->duration_days);
+                    } else {
+                        $balance->decrementPending((float) $leaveRequest->duration_days);
+                    }
+                }
+            }
+
+            // Also delete any associated leave allowance requests if pending
+            if (stripos($leaveRequest->leaveType->name ?? '', 'annual') !== false) {
+                \App\Models\Payroll\LeaveAllowanceRequest::where('leave_request_id', $leaveRequest->id)
+                    ->where('status', 'pending')
+                    ->delete();
+            }
+
+            $leaveRequest->delete(); // Soft delete
+
+            DB::commit();
+            return ApiResponse::success(null, 'Leave request deleted successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->handleException($e, 'deleting leave request');
         }
     }
 
@@ -534,9 +587,10 @@ class LeaveRequestController extends Controller
     public function calculateDuration(Request $request)
     {
         try {
+            $tenantId = Auth::user()->tenant_id;
             $validated = $request->validate([
-                'employee_id' => 'required|exists:employees,id',
-                'leave_type_id' => 'required|exists:leave_types,id',
+                'employee_id' => 'required|exists:employees,id,tenant_id,' . $tenantId,
+                'leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
                 'start_date' => 'required|date',
                 'end_date' => 'required|date|after_or_equal:start_date',
             ]);
@@ -571,5 +625,91 @@ class LeaveRequestController extends Controller
         } catch (\Exception $e) {
             return $this->handleException($e, 'calculating leave duration');
         }
+    }
+
+    /**
+     * Process a leave allowance request for an annual leave booking.
+     */
+    protected function processLeaveAllowanceRequest(
+        LeaveRequest $leaveRequest,
+        Employee $employee,
+        LeaveType $leaveType,
+        string $leaveYear,
+        int $tenantId
+    ): void {
+        // Check if leave type is "Annual Leave" (check code 'AL' first, then fallback to name)
+        if ($leaveType->code !== 'AL' && stripos($leaveType->name, 'annual') === false) {
+            return; // Only allow for annual leave
+        }
+
+        // Check if employee already has an approved allowance for this leave year
+        $existingApproved = LeaveAllowanceRequestModel::where('tenant_id', $tenantId)
+            ->where('employee_id', $employee->id)
+            ->where('leave_year', $leaveYear)
+            ->where('status', 'approved')
+            ->exists();
+
+        // Check for any existing request in this leave year (approved, pending, or declined)
+        // The database has a unique constraint on (tenant_id, employee_id, leave_year)
+        // Use lockForUpdate to prevent race conditions within the transaction
+        $existingRequest = LeaveAllowanceRequestModel::where('tenant_id', $tenantId)
+            ->where('employee_id', $employee->id)
+            ->where('leave_year', $leaveYear)
+            ->lockForUpdate()
+            ->first();
+
+        if ($existingRequest) {
+            // Since we removed the unique constraint, check if there is any ACTIVE request.
+            // If the request is active (pending, approved, or paid), stop.
+            if (in_array($existingRequest->status, ['pending', 'approved', 'paid'])) {
+                Log::info("Active leave allowance request already exists (Status: {$existingRequest->status}) for employee {$employee->id} in leave year {$leaveYear}");
+                return;
+            }
+
+            // If the existing request is declined or cancelled, we allow creating a new one.
+            Log::info("Existing leave allowance request found but status is '{$existingRequest->status}'. Creating a new request for employee {$employee->id} in leave year {$leaveYear}");
+        }
+
+        // Get the employee's active annual annual structure
+        $annualStructure = AnnualSalaryStructure::with('items.component')
+            ->where('employee_id', $employee->id)
+            ->where('status', 'active')
+            ->latest()
+            ->first();
+
+        if (!$annualStructure) {
+            Log::warning("No annual salary structure found for employee {$employee->id}");
+            return;
+        }
+
+        // Find the Leave Allowance component in the structure
+        $leaveAllowanceItem = $annualStructure->items->first(function ($item) {
+            return stripos($item->component->name ?? '', 'leave allowance') !== false ||
+                stripos($item->component->code ?? '', 'LEAVE_ALLOW') !== false;
+        });
+
+        if (!$leaveAllowanceItem) {
+            Log::info("No leave allowance component found in annual structure for employee {$employee->id}");
+            return;
+        }
+
+        // Create new record (always create new, never recycle)
+        $leaveAllowanceRequest = LeaveAllowanceRequestModel::create([
+            'tenant_id' => $tenantId,
+            'employee_id' => $employee->id,
+            'leave_request_id' => $leaveRequest->id,
+            'annual_structure_item_id' => $leaveAllowanceItem->id,
+            'amount' => $leaveAllowanceItem->annual_amount,
+            'leave_year' => $leaveYear,
+            'status' => 'pending',
+        ]);
+
+        // Notify Finance admins
+        $financeUsers = User::financeUsers($tenantId);
+        if ($financeUsers->isNotEmpty()) {
+            Notification::send($financeUsers, new LeaveAllowanceRequestNotification($leaveAllowanceRequest));
+        }
+
+        Log::info("Leave allowance request created for employee {$employee->id}. Amount: {$leaveAllowanceItem->annual_amount}");
     }
 }

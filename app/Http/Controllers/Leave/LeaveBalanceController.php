@@ -12,6 +12,7 @@ use App\Traits\HandlesApiErrors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class LeaveBalanceController extends Controller
 {
@@ -28,11 +29,28 @@ class LeaveBalanceController extends Controller
     {
         try {
             $tenantId = Auth::user()->tenant_id;
-            $query = LeaveBalance::with(['leaveType', 'employee'])
+            $query = LeaveBalance::with(['leaveType', 'employee.employmentDetails.leaveGroup'])
                 ->where('tenant_id', $tenantId);
 
             if ($request->has('employee_id')) {
-                $query->where('employee_id', $request->employee_id);
+                $employeeId = $request->employee_id;
+                $year = $request->has('year') ? $request->year : $this->leaveYearService->getCurrentLeaveYear($tenantId);
+
+                // Sync balances for the filtered employee
+                $this->syncBalances((int)$employeeId, (int)$year);
+
+                $query->where('employee_id', $employeeId);
+            }
+
+            if ($request->has('leave_type_id')) {
+                $query->where('leave_type_id', $request->leave_type_id);
+            }
+
+            if ($request->has('leave_group_id')) {
+                $groupId = $request->leave_group_id;
+                $query->whereHas('employee.employmentDetails', function ($q) use ($groupId) {
+                    $q->where('leave_group_id', $groupId);
+                });
             }
 
             if ($request->has('year')) {
@@ -61,6 +79,9 @@ class LeaveBalanceController extends Controller
             }
 
             $currentLeaveYear = $this->leaveYearService->getCurrentLeaveYear($user->tenant_id);
+
+            // Sync balances for current user before fetching
+            $this->syncBalances($employee->id, (int)$currentLeaveYear);
 
             $balances = LeaveBalance::with('leaveType')
                 ->where('employee_id', $employee->id)
@@ -118,8 +139,8 @@ class LeaveBalanceController extends Controller
             $tenantId = $user->tenant_id;
 
             $validated = $request->validate([
-                'employee_id' => 'required|exists:employees,id',
-                'leave_type_id' => 'required|exists:leave_types,id',
+                'employee_id' => 'required|exists:employees,id,tenant_id,' . $tenantId,
+                'leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
                 'year' => 'required|integer',
                 'adjustment_type' => 'required|in:addition,deduction',
                 'amount' => 'required|numeric|min:0.5',
@@ -196,6 +217,34 @@ class LeaveBalanceController extends Controller
             return ApiResponse::success($mapped);
         } catch (\Exception $e) {
             return $this->handleException($e, 'fetching adjustment history');
+        }
+    }
+
+    /**
+     * Synchronize leave balance pending amounts with actual requests.
+     */
+    protected function syncBalances(int $employeeId, int $year)
+    {
+        try {
+            $balances = LeaveBalance::where('employee_id', $employeeId)
+                ->where('year', $year)
+                ->get();
+
+            $boundaries = $this->leaveYearService->getLeaveYearBoundaries($year, Auth::user()->tenant_id);
+
+            foreach ($balances as $balance) {
+                $actualPending = \App\Models\Leave\LeaveRequest::where('employee_id', $employeeId)
+                    ->where('leave_type_id', $balance->leave_type_id)
+                    ->whereBetween('start_date', [$boundaries['start'], $boundaries['end']])
+                    ->where('status', 'pending')
+                    ->sum('duration_days');
+
+                if ((float)$balance->pending_approval !== (float)$actualPending) {
+                    $balance->update(['pending_approval' => $actualPending]);
+                }
+            }
+        } catch (\Exception $e) {
+            Log::error("Failed to sync balances for employee {$employeeId}: " . $e->getMessage());
         }
     }
 }

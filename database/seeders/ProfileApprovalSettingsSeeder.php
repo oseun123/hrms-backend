@@ -45,6 +45,6 @@ class ProfileApprovalSettingsSeeder extends Seeder
             }
         }
 
-        $this->command->info('Profile approval settings seeded successfully for all tenants.');
+        $this->command?->info('Profile approval settings seeded successfully for all tenants.');
     }
 }

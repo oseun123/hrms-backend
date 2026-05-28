@@ -157,7 +157,7 @@ class RoleController extends Controller
 
         $validated = $request->validate([
             'roles' => 'required|array',
-            'roles.*' => 'exists:roles,id',
+            'roles.*' => 'exists:roles,id,tenant_id,' . $tenantId,
         ]);
 
         $user->roles()->sync($validated['roles']);
@@ -181,7 +181,7 @@ class RoleController extends Controller
 
         $validated = $request->validate([
             'users' => 'required|array',
-            'users.*' => 'exists:users,id',
+            'users.*' => 'exists:users,id,tenant_id,' . $tenantId,
         ]);
 
         // Ensure all users belong to the same tenant

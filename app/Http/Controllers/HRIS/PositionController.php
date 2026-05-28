@@ -70,22 +70,23 @@ class PositionController extends Controller
     public function store(Request $request)
     {
         try {
+            $tenantId = $request->user()->tenant_id;
             $validated = $request->validate([
-                'department_id' => 'required|exists:departments,id',
-                'level_id' => 'nullable|exists:levels,id',
-                'grade_id' => 'nullable|exists:grades,id',
+                'department_id' => 'required|exists:departments,id,tenant_id,' . $tenantId,
+                'level_id' => 'nullable|exists:levels,id,tenant_id,' . $tenantId,
+                'grade_id' => 'nullable|exists:grades,id,tenant_id,' . $tenantId,
                 'code' => 'required|string|max:50|unique:positions,code',
                 'title' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'min_salary' => 'nullable|numeric|min:0',
                 'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
-                'reports_to' => 'nullable|exists:positions,id',
+                'reports_to' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
                 'required_qualifications' => 'nullable|string',
                 'responsibilities' => 'nullable|string',
                 'is_active' => 'boolean',
             ]);
 
-            $validated['tenant_id'] = $request->user()->tenant_id;
+            $validated['tenant_id'] = $tenantId;
             $validated['created_by'] = auth()->id();
 
             $position = Position::create($validated);
@@ -102,9 +103,16 @@ class PositionController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $position = Position::with(['department', 'level', 'grade', 'reportsTo', 'subordinates', 'employees'])
+            $position = Position::with(['department', 'level', 'grade', 'reportsTo', 'subordinates'])
                 ->where('tenant_id', $request->user()->tenant_id)
                 ->findOrFail($id);
+
+            // Fetch employees in this position with required relations
+            $employees = \App\Models\Hris\Employee::whereHas('employmentDetails', function ($query) use ($id) {
+                $query->where('position_id', $id);
+            })->with(['user', 'employmentDetails.position', 'employmentDetails.department'])->get();
+
+            $position->setRelation('employees', $employees);
 
             return ApiResponse::success($position);
         } catch (\Exception $e) {
@@ -118,19 +126,20 @@ class PositionController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $position = Position::where('tenant_id', $request->user()->tenant_id)
+            $tenantId = $request->user()->tenant_id;
+            $position = Position::where('tenant_id', $tenantId)
                 ->findOrFail($id);
 
             $validated = $request->validate([
-                'department_id' => 'required|exists:departments,id',
-                'level_id' => 'nullable|exists:levels,id',
-                'grade_id' => 'nullable|exists:grades,id',
+                'department_id' => 'required|exists:departments,id,tenant_id,' . $tenantId,
+                'level_id' => 'nullable|exists:levels,id,tenant_id,' . $tenantId,
+                'grade_id' => 'nullable|exists:grades,id,tenant_id,' . $tenantId,
                 'code' => 'required|string|max:50|unique:positions,code,' . $id,
                 'title' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'min_salary' => 'nullable|numeric|min:0',
                 'max_salary' => 'nullable|numeric|min:0|gte:min_salary',
-                'reports_to' => 'nullable|exists:positions,id',
+                'reports_to' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
                 'required_qualifications' => 'nullable|string',
                 'responsibilities' => 'nullable|string',
                 'is_active' => 'boolean',

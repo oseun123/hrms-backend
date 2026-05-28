@@ -43,8 +43,9 @@ class DocumentController extends Controller
     public function store(Request $request, Employee $employee)
     {
         try {
+            $tenantId = $request->user()->tenant_id;
             $validated = $request->validate([
-                'document_type_id' => 'required|exists:document_types,id',
+                'document_type_id' => 'required|exists:document_types,id,tenant_id,' . $tenantId,
                 'document_name' => 'required|string|max:255',
                 'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB max
                 'issue_date' => 'nullable|date',

@@ -9,10 +9,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 use App\Models\Hris\Employee;
 use App\Models\Preference\Preference;
+use App\Traits\TenantScoped;
 
 class User extends BaseUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, TenantScoped;
 
     /**
      * The accessors to append to the model's array form.
@@ -77,6 +78,11 @@ class User extends BaseUser
         return $this->hasOne(Employee::class);
     }
 
+    public function knownDevices()
+    {
+        return $this->hasMany(KnownDevice::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -87,8 +93,11 @@ class User extends BaseUser
      */
     public function hasPermission(string $permissionSlug): bool
     {
-        // For convenience, if no roles are assigned, check permission cache or similar
-        // But for now, we'll just check the roles' permissions
+        // Admin role always has all permissions (mirrors frontend logic)
+        if ($this->roles()->where('slug', 'admin')->exists()) {
+            return true;
+        }
+
         return $this->roles()->whereHas('permissions', function ($query) use ($permissionSlug) {
             $query->where('slug', $permissionSlug);
         })->exists();
@@ -127,14 +136,18 @@ class User extends BaseUser
     }
 
     /**
-     * Get all HR users for a tenant
+     * Get all HR users for a tenant, optionally filtered by role
      */
-    public static function hrUsers(int $tenantId)
+    public static function hrUsers(int $tenantId, ?string $role = null)
     {
-        $hrEmployeeIds = Preference::where('tenant_id', $tenantId)
-            ->where('category', 'hr_admins')
-            ->pluck('key')
-            ->toArray();
+        $query = Preference::where('tenant_id', $tenantId)
+            ->where('category', 'hr_admins');
+
+        if ($role) {
+            $query->where('value', 'LIKE', '%"role":"' . $role . '"%');
+        }
+
+        $hrEmployeeIds = $query->pluck('key')->toArray();
 
         if (empty($hrEmployeeIds)) {
             return collect();
@@ -146,6 +159,14 @@ class User extends BaseUser
                     ->from('employees')
                     ->whereIn('id', $hrEmployeeIds);
             })->get();
+    }
+
+    /**
+     * Get all Finance users for a tenant
+     */
+    public static function financeUsers(int $tenantId)
+    {
+        return static::hrUsers($tenantId, 'Finance Admin');
     }
 
     /**

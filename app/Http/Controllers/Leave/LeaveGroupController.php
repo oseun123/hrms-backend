@@ -33,7 +33,7 @@ class LeaveGroupController extends Controller
                 'description' => 'nullable|string',
                 'is_active' => 'boolean',
                 'entitlements' => 'nullable|array',
-                'entitlements.*.leave_type_id' => 'required|exists:leave_types,id',
+                'entitlements.*.leave_type_id' => 'required|exists:leave_types,id,tenant_id,' . $tenantId,
                 'entitlements.*.days' => 'required|numeric|min:0',
             ]);
 

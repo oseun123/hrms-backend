@@ -8,12 +8,19 @@ use Illuminate\Database\Seeder;
 
 class LeaveTypeSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeder.
      */
     public function run(): void
     {
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         $defaultTypes = [
             [

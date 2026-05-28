@@ -15,6 +15,17 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
         then: function () {
+            // Register Super Admin Routes
+            // Using a minimal middleware stack WITHOUT EnsureFrontendRequestsAreStateful
+            // because super-admin uses Bearer tokens, not session cookies.
+            // This avoids CSRF mismatch errors when accessed from localhost:3000 (no tenant subdomain).
+            Route::middleware([
+                \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                \App\Http\Middleware\ExtractTokenFromQuery::class,
+            ])
+                ->prefix('api')
+                ->group(base_path('routes/super-admin.php'));
+
             // Custom route model binding for Employee with tenant filtering
             Route::bind('employee', function ($value) {
                 $employee = \App\Models\Hris\Employee::where('id', $value);
@@ -50,8 +61,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
 
-        // API middleware group
         $middleware->api(prepend: [
+            \App\Http\Middleware\ExtractTokenFromQuery::class,
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]);
 
@@ -77,6 +88,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'approval' => \App\Http\Middleware\CheckApprovalRequired::class,
             'track.first.login' => \App\Http\Middleware\TrackFirstLogin::class,
             'permission' => \App\Http\Middleware\CheckPermission::class,
+            'auth.super-admin' => \App\Http\Middleware\EnsureSuperAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

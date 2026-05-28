@@ -3,55 +3,73 @@
 namespace Database\Seeders;
 
 use App\Models\Hris\Department;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+    protected ?User $adminUser = null;
+
+    public function __construct(?Tenant $tenant = null, ?User $adminUser = null)
+    {
+        $this->tenant = $tenant;
+        $this->adminUser = $adminUser;
+    }
+
     public function run(): void
     {
-        $tenantId = 1;
-        $adminUser = User::where('email', 'admin@hrms.local')->first();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
-        // Create main departments
-        $itDept = Department::create([
-            'tenant_id' => $tenantId,
-            'code' => 'IT',
-            'name' => 'Information Technology',
-            'description' => 'IT Department',
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+        foreach ($tenants as $tenant) {
+            $adminUser = $this->adminUser ?? User::where('tenant_id', $tenant->id)->first() ?? User::where('email', 'admin@hrms.local')->first();
 
-        Department::create([
-            'tenant_id' => $tenantId,
-            'code' => 'HR',
-            'name' => 'Human Resources',
-            'description' => 'HR Department',
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            if (!$adminUser) {
+                continue;
+            }
 
-        Department::create([
-            'tenant_id' => $tenantId,
-            'code' => 'FIN',
-            'name' => 'Finance',
-            'description' => 'Finance Department',
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            $itDept = Department::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'IT'],
+                [
+                    'name' => 'Information Technology',
+                    'description' => 'IT Department',
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
 
-        // Create sub-department
-        Department::create([
-            'tenant_id' => $tenantId,
-            'parent_id' => $itDept->id,
-            'code' => 'IT-DEV',
-            'name' => 'Development',
-            'description' => 'Software Development Team',
-            'is_active' => true,
-            'created_by' => $adminUser->id,
-        ]);
+            Department::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'HR'],
+                [
+                    'name' => 'Human Resources',
+                    'description' => 'HR Department',
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
 
-        $this->command->info('Departments seeded successfully!');
+            Department::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'FIN'],
+                [
+                    'name' => 'Finance',
+                    'description' => 'Finance Department',
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
+
+            // Create sub-department
+            Department::updateOrCreate(
+                ['tenant_id' => $tenant->id, 'code' => 'IT-DEV'],
+                [
+                    'parent_id' => $itDept->id,
+                    'name' => 'Development',
+                    'description' => 'Software Development Team',
+                    'is_active' => true,
+                    'created_by' => $adminUser->id,
+                ]
+            );
+        }
     }
 }

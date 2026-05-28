@@ -99,7 +99,9 @@ class SkillController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            $skill = Skill::with('employees')
+            $skill = Skill::with(['employees' => function ($query) {
+                $query->with(['user', 'employmentDetails.position', 'employmentDetails.department']);
+            }])
                 ->where('tenant_id', $request->user()->tenant_id)
                 ->findOrFail($id);
 

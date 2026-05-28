@@ -9,12 +9,19 @@ use Illuminate\Database\Seeder;
 
 class LeaveWorkflowSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             // 1. Create the default "Manual (Legacy)" workflow

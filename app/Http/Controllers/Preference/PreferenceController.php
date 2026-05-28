@@ -111,6 +111,27 @@ class PreferenceController extends Controller
             $tenantId = $user->tenant_id;
             $scope = $validated['scope'];
 
+            // Authorization check based on category permissions
+            if ($scope === 'tenant') {
+                $categoryPermissions = [
+                    'language' => 'preferences.language_region',
+                    'organization' => 'preferences.org_settings',
+                    'privacy' => 'preferences.privacy_security',
+                    'display' => 'preferences.display',
+                    'security_policy' => 'preferences.privacy_security',
+                ];
+
+                foreach ($validated['preferences'] as $pref) {
+                    $category = $pref['category'];
+                    if (isset($categoryPermissions[$category])) {
+                        $requiredPermission = $categoryPermissions[$category];
+                        if (!$user->hasPermission($requiredPermission)) {
+                            return ApiResponse::forbidden("You do not have permission to modify {$category} settings.");
+                        }
+                    }
+                }
+            }
+
             DB::beginTransaction();
 
             $synced = [];
@@ -138,6 +159,16 @@ class PreferenceController extends Controller
                     ],
                     ['value' => $data['value']]
                 );
+
+                // If syncing at tenant level, clear any individual user overrides for these specific keys
+                // to ensure the setting truly "affects all employees" as requested.
+                if ($scope === 'tenant') {
+                    Preference::where('tenant_id', $tenantId)
+                        ->whereNotNull('user_id')
+                        ->where('category', $data['category'])
+                        ->where('key', $data['key'])
+                        ->delete();
+                }
 
                 $synced[] = $preference;
             }

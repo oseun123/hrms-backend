@@ -8,13 +8,20 @@ use App\Models\Preference\Preference;
 
 class DefaultSecurityPoliciesSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Seed default security policies for all tenants.
      * These defaults will be used if no custom policies are set.
      */
     public function run(): void
     {
-        $tenants = Tenant::all();
+        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
 
         $defaultPolicies = [
             [
@@ -55,9 +62,9 @@ class DefaultSecurityPoliciesSeeder extends Seeder
                 );
             }
 
-            $this->command->info("Default security policies seeded for tenant: {$tenant->name}");
+            $this->command?->info("Default security policies seeded for tenant: {$tenant->name}");
         }
 
-        $this->command->info('Default security policies seeded successfully!');
+        $this->command?->info('Default security policies seeded successfully!');
     }
 }

@@ -130,4 +130,49 @@ class LeaveBalanceService
             'carried_forward' => $carryAmount,
         ]);
     }
+
+    /**
+     * Process year-end rollover for all employees in a tenant.
+     */
+    public function processYearEndForTenant(int $tenantId, int $fromYear): array
+    {
+        $toYear = $fromYear + 1;
+        $employeesProcessed = 0;
+        $totalCarriedForward = 0;
+
+        // Get all active employees with leave groups
+        $employees = Employee::where('tenant_id', $tenantId)
+            ->whereHas('employmentDetails', function ($q) {
+                $q->whereNotNull('leave_group_id');
+            })
+            ->with('employmentDetails.leaveGroup.policies.leaveType')
+            ->get();
+
+        foreach ($employees as $employee) {
+            $leaveGroupId = $employee->employmentDetails->leave_group_id ?? null;
+
+            if (!$leaveGroupId) continue;
+
+            // Get all active policies for this employee's leave group
+            $policies = LeavePolicy::where('leave_group_id', $leaveGroupId)
+                ->where('is_active', true)
+                ->get();
+
+            foreach ($policies as $policy) {
+                // Process carry forward for each leave type
+                $this->carryForward($employee->id, $policy->leave_type_id, $fromYear);
+
+                // Accrue new entitlement for the new year
+                $this->accrue($employee, $policy, $toYear);
+            }
+
+            $employeesProcessed++;
+        }
+
+        return [
+            'employees_processed' => $employeesProcessed,
+            'from_year' => $fromYear,
+            'to_year' => $toYear,
+        ];
+    }
 }
