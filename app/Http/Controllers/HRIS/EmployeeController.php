@@ -351,6 +351,7 @@ class EmployeeController extends Controller
             'first_name' => 'sometimes|required|string|max:100',
             'middle_name' => 'nullable|string|max:100',
             'last_name' => 'sometimes|required|string|max:100',
+            'email' => 'sometimes|required|email|unique:users,email,' . ($employee->user_id ?? 0),
             'date_of_birth' => 'nullable|date',
             'gender' => 'nullable|in:male,female,other',
             'marital_status' => 'nullable|in:single,married,divorced,widowed',
@@ -363,6 +364,30 @@ class EmployeeController extends Controller
 
 
         $validated['updated_by'] = Auth::id();
+
+        // Sync user name and email if user_id exists
+        if ($employee->user_id) {
+            $user = User::find($employee->user_id);
+            if ($user) {
+                $userData = [];
+                if (isset($validated['email'])) {
+                    $userData['email'] = $validated['email'];
+                }
+                
+                // If name-related fields are updated, sync user name
+                if (isset($validated['first_name']) || isset($validated['middle_name']) || isset($validated['last_name'])) {
+                    $userData['name'] = trim(
+                        ($validated['first_name'] ?? $employee->first_name) . ' ' .
+                        ($validated['middle_name'] ?? $employee->middle_name) . ' ' .
+                        ($validated['last_name'] ?? $employee->last_name)
+                    );
+                }
+                
+                if (!empty($userData)) {
+                    $user->update($userData);
+                }
+            }
+        }
 
         $employee->update($validated);
         $this->completenessService->calculate($employee);
