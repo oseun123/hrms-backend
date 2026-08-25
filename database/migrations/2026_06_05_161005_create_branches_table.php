@@ -43,10 +43,6 @@ return new class extends Migration
 
             // Unique assignment
             $table->unique(['branch_id', 'employee_id'], 'branch_contact_unique');
-
-            // Foreign keys
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 

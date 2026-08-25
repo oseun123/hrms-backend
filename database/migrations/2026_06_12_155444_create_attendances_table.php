@@ -35,8 +35,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // Foreign keys
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unique(['tenant_id', 'user_id', 'date'], 'attendance_tenant_user_date_unique');
         });
     }
