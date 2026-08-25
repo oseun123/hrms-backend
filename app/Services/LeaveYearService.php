@@ -98,4 +98,30 @@ class LeaveYearService
 
         return $leaveYear . '/' . ($leaveYear + 1);
     }
+
+    /**
+     * Get the current active leave year, taking year-end processing into account.
+     */
+    public function getCurrentActiveLeaveYear(?int $tenantId = null): int
+    {
+        $tenantId = $tenantId ?? Auth::user()?->tenant_id;
+        if (!$tenantId) {
+            return Carbon::now()->year;
+        }
+
+        $currentYear = $this->getCurrentLeaveYear($tenantId);
+        $previousYear = $currentYear - 1;
+
+        // Check if previous year has been processed
+        $previousYearProcessed = \App\Models\Leave\LeaveYearEndProcessing::where('tenant_id', $tenantId)
+            ->where('from_year', $previousYear)
+            ->exists();
+
+        if (!$previousYearProcessed) {
+            return $previousYear;
+        }
+
+        return $currentYear;
+    }
 }
+

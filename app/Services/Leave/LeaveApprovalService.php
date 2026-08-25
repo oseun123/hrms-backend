@@ -117,7 +117,11 @@ class LeaveApprovalService
             case 'secondary_manager':
                 return $details->secondaryManager?->user_id;
             case 'hr':
-                $hrUser = $this->getFallbackApprover($leaveRequest->tenant_id);
+                // Only resolve to actual HR-role users — no fallback to admin or any user
+                $hrUser = User::where('tenant_id', $leaveRequest->tenant_id)
+                    ->whereHas('roles', function ($q) {
+                        $q->where('name', 'hr');
+                    })->first();
                 return $hrUser?->id;
             case 'specific_employee':
                 $specificEmp = Employee::find($levelConfig->approver_id);

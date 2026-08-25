@@ -21,7 +21,7 @@ class PayrollSeeder extends Seeder
      */
     public function run(): void
     {
-        $tenant = $this->tenant ?? Tenant::first();
+        $tenant = ($this->tenant && $this->tenant->exists) ? $this->tenant : Tenant::first();
 
         if (!$tenant) {
             return;

@@ -16,6 +16,7 @@ class EmployeeEmploymentDetail extends BaseModel
         'employee_id',
         'work_email',
         'department_id',
+        'branch_id',
         'position_id',
         'manager_id',
         'team_lead_id',
@@ -58,6 +59,11 @@ class EmployeeEmploymentDetail extends BaseModel
     public function leaveGroup()
     {
         return $this->belongsTo(\App\Models\Leave\LeaveGroup::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function employee()

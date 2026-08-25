@@ -12,16 +12,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class,
+            SuperAdminSeeder::class,
             DepartmentSeeder::class,
+            BranchSeeder::class,
             LevelSeeder::class,
             GradeSeeder::class,
             PositionSeeder::class,
-            EmployeeSeeder::class,
+            // EmployeeSeeder::class,
             DocumentTypeSeeder::class,
             SkillSeeder::class,
             DefaultSecurityPoliciesSeeder::class,
             DefaultPreferencesSeeder::class,
+            ProfileApprovalSettingsSeeder::class,
             PublicHolidaySeeder::class,
             EmployeeNumberFormatSeeder::class,
             PermissionSeeder::class,
@@ -29,14 +31,14 @@ class DatabaseSeeder extends Seeder
             LeaveWorkflowSeeder::class,
             PayrollSeeder::class,
             RequestModuleSeeder::class,
+            AttendanceDefaultsSeeder::class,
         ]);
 
         $this->command?->info('');
         $this->command?->info('====================================');
         $this->command?->info('Database seeded successfully!');
         $this->command?->info('====================================');
-        $this->command?->info('Admin: admin@hrms.local / password');
-        $this->command?->info('Employee: john.doe@hrms.local / password');
+        $this->command?->info('Super Admin: superadmin@hrms.local / password');
         $this->command?->info('====================================');
     }
 }

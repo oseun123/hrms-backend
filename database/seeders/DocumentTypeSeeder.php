@@ -17,7 +17,7 @@ class DocumentTypeSeeder extends Seeder
 
     public function run(): void
     {
-        $tenantId = $this->tenant ? $this->tenant->id : 1;
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         $documentTypes = [
             [
@@ -92,15 +92,17 @@ class DocumentTypeSeeder extends Seeder
             ],
         ];
 
-        foreach ($documentTypes as $type) {
-            DB::table('document_types')->updateOrInsert(
-                ['tenant_id' => $tenantId, 'code' => $type['code']],
-                array_merge($type, [
-                    'is_active' => true,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ])
-            );
+        foreach ($tenants as $tenant) {
+            foreach ($documentTypes as $type) {
+                DB::table('document_types')->updateOrInsert(
+                    ['tenant_id' => $tenant->id, 'code' => $type['code']],
+                    array_merge($type, [
+                        'is_active' => true,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ])
+                );
+            }
         }
     }
 }

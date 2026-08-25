@@ -22,7 +22,7 @@ class EmployeeNumberFormatSeeder extends Seeder
     public function run(): void
     {
         // Get all tenants
-        $tenants = $this->tenant ? collect([$this->tenant]) : \App\Models\Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : \App\Models\Tenant::all();
 
         foreach ($tenants as $tenant) {
             // Get any user for this tenant to be the creator

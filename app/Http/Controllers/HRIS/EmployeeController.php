@@ -42,6 +42,7 @@ class EmployeeController extends Controller
         $query = Employee::with([
             'user',
             'employmentDetails.department',
+            'employmentDetails.branch',
             'employmentDetails.position',
             'employmentDetails.leaveGroup'
         ])
@@ -51,6 +52,13 @@ class EmployeeController extends Controller
         if ($request->filled('department_id')) {
             $query->whereHas('employmentDetails', function ($q) use ($request) {
                 $q->where('department_id', $request->department_id);
+            });
+        }
+
+        // Filter by branch
+        if ($request->filled('branch_id')) {
+            $query->whereHas('employmentDetails', function ($q) use ($request) {
+                $q->where('branch_id', $request->branch_id);
             });
         }
 
@@ -168,6 +176,7 @@ class EmployeeController extends Controller
             'employment_details' => 'nullable|array',
             'employment_details.work_email' => 'nullable|email',
             'employment_details.department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'employment_details.branch_id' => 'nullable|exists:branches,id,tenant_id,' . $tenantId,
             'employment_details.position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
             'employment_details.manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'employment_details.team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
@@ -271,7 +280,7 @@ class EmployeeController extends Controller
             $this->completenessService->calculate($employee);
 
             return ApiResponse::created([
-                'employee' => $employee->load(['user', 'employmentDetails.department', 'employmentDetails.position', 'employmentDetails.manager', 'employmentDetails.teamLead', 'employmentDetails.secondaryManager', 'employmentDetails.leaveGroup']),
+                'employee' => $employee->load(['user', 'employmentDetails.department', 'employmentDetails.branch', 'employmentDetails.position', 'employmentDetails.manager', 'employmentDetails.teamLead', 'employmentDetails.secondaryManager', 'employmentDetails.leaveGroup']),
             ], 'Employee and user account created successfully. A welcome email has been sent with instructions to set their password.');
         } catch (\Exception $e) {
             DB::rollBack();
@@ -318,6 +327,7 @@ class EmployeeController extends Controller
         $employee->load([
             'user',
             'employmentDetails.department',
+            'employmentDetails.branch',
             'employmentDetails.position',
             'employmentDetails.manager',
             'employmentDetails.leaveGroup',
@@ -414,7 +424,7 @@ class EmployeeController extends Controller
      */
     public function employmentDetails(Employee $employee)
     {
-        $employee->load('employmentDetails.department', 'employmentDetails.position', 'employmentDetails.manager', 'employmentDetails.leaveGroup');
+        $employee->load('employmentDetails.department', 'employmentDetails.branch', 'employmentDetails.position', 'employmentDetails.manager', 'employmentDetails.leaveGroup');
 
         return ApiResponse::success($employee->employmentDetails);
     }
@@ -487,6 +497,7 @@ class EmployeeController extends Controller
         $validated = $request->validate([
             'work_email' => 'nullable|email',
             'department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'branch_id' => 'nullable|exists:branches,id,tenant_id,' . $tenantId,
             'position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
             'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
@@ -521,7 +532,7 @@ class EmployeeController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Employment details created successfully',
-            'data' => $employmentDetails->load(['department', 'position', 'manager', 'teamLead', 'secondaryManager', 'leaveGroup']),
+            'data' => $employmentDetails->load(['department', 'branch', 'position', 'manager', 'teamLead', 'secondaryManager', 'leaveGroup']),
         ], 201);
     }
 
@@ -584,6 +595,7 @@ class EmployeeController extends Controller
         $validated = $request->validate([
             'work_email' => 'nullable|email',
             'department_id' => 'nullable|exists:departments,id,tenant_id,' . $tenantId,
+            'branch_id' => 'nullable|exists:branches,id,tenant_id,' . $tenantId,
             'position_id' => 'nullable|exists:positions,id,tenant_id,' . $tenantId,
             'manager_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
             'team_lead_id' => 'nullable|exists:employees,id,tenant_id,' . $tenantId,
@@ -619,7 +631,7 @@ class EmployeeController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Employment details updated successfully',
-            'data' => $employmentDetails->fresh(['department', 'position', 'manager', 'teamLead', 'secondaryManager', 'leaveGroup']),
+            'data' => $employmentDetails->fresh(['department', 'branch', 'position', 'manager', 'teamLead', 'secondaryManager', 'leaveGroup']),
         ]);
     }
 

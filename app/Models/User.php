@@ -30,6 +30,7 @@ class User extends BaseUser
     protected $fillable = [
         'name',
         'email',
+        'attendance_photo_path',
         'password',
         'password_changed_at',
         'tenant_id',

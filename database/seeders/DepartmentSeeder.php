@@ -20,10 +20,10 @@ class DepartmentSeeder extends Seeder
 
     public function run(): void
     {
-        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
-            $adminUser = $this->adminUser ?? User::where('tenant_id', $tenant->id)->first() ?? User::where('email', 'admin@hrms.local')->first();
+            $adminUser = ($this->adminUser && $this->adminUser->exists) ? $this->adminUser : (User::where('tenant_id', $tenant->id)->first() ?? User::where('email', 'admin@hrms.local')->first());
 
             if (!$adminUser) {
                 continue;

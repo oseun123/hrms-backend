@@ -134,7 +134,7 @@ class SkillSeeder extends Seeder
         ];
 
         // Get all tenants
-        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             foreach ($skills as $skill) {

@@ -165,6 +165,11 @@ class LeaveRequestController extends Controller
                 $tenantId
             );
 
+            $currentActiveYear = $leaveYearService->getCurrentActiveLeaveYear($tenantId);
+            if ($leaveYear > $currentActiveYear) {
+                return ApiResponse::error("Cannot book leave for {$leaveYear} as the year-end rollover for {$currentActiveYear} has not been processed yet.", 400);
+            }
+
             $balance = $leaveBalanceService->getEffectiveBalance($employee, $policy, $leaveYear);
             $available = $balance->available_balance;
 
@@ -185,7 +190,9 @@ class LeaveRequestController extends Controller
                 $attachmentPath = $uploadResult['path'];
             }
 
-            return DB::transaction(function () use ($tenantId, $validated, $attachmentPath, $employee, $policy, $leaveYear, $duration, $balance, $leaveType) {
+            DB::beginTransaction();
+
+            try {
                 $leaveRequest = LeaveRequest::create([
                     'tenant_id' => $tenantId,
                     'employee_id' => $validated['employee_id'],
@@ -226,10 +233,23 @@ class LeaveRequestController extends Controller
 
                 // Initialize Approval Chain
                 $approvalService = app(\App\Services\Leave\LeaveApprovalService::class);
-                $approvalService->initializeApprovalChain($leaveRequest, $policy);
+                $result = $approvalService->initializeApprovalChain($leaveRequest, $policy);
 
+                if (!$result) {
+                    DB::rollBack();
+                    return ApiResponse::error(
+                        'Unable to submit leave request: No valid approver could be found for the configured approval workflow. '
+                        . 'Please ensure your organization has the required approvers (e.g. Direct Manager, HR) assigned.',
+                        400
+                    );
+                }
+
+                DB::commit();
                 return ApiResponse::success($leaveRequest, 'Leave request submitted successfully', 201);
-            });
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return $this->handleException($e, 'submitting leave request');
+            }
         } catch (\Exception $e) {
             return $this->handleException($e, 'submitting leave request');
         }
@@ -315,6 +335,13 @@ class LeaveRequestController extends Controller
             $policyValidation = $policyService->validatePolicy($employee, $policy, $validated['start_date'], $validated['end_date'], $newDuration);
             if (!$policyValidation['is_valid']) {
                 return ApiResponse::error($policyValidation['message'], 400);
+            }
+
+            $leaveYearService = app(\App\Services\LeaveYearService::class);
+            $newLeaveYear = $leaveYearService->getLeaveYearForDate(Carbon::parse($validated['start_date']), $tenantId);
+            $currentActiveYear = $leaveYearService->getCurrentActiveLeaveYear($tenantId);
+            if ($newLeaveYear > $currentActiveYear) {
+                return ApiResponse::error("Cannot book leave for {$newLeaveYear} as the year-end rollover for {$currentActiveYear} has not been processed yet.", 400);
             }
 
             DB::beginTransaction();
@@ -403,7 +430,16 @@ class LeaveRequestController extends Controller
             // 9. Reset/Re-initialize approval chain
             $leaveRequest->approvals()->delete();
             $approvalService = app(\App\Services\Leave\LeaveApprovalService::class);
-            $approvalService->initializeApprovalChain($leaveRequest, $policy);
+            $result = $approvalService->initializeApprovalChain($leaveRequest, $policy);
+
+            if (!$result) {
+                DB::rollBack();
+                return ApiResponse::error(
+                    'Unable to re-submit leave request: No valid approver could be found for the configured approval workflow. '
+                    . 'Please ensure your organization has the required approvers (e.g. Direct Manager, HR) assigned.',
+                    400
+                );
+            }
 
             DB::commit();
             return ApiResponse::success($leaveRequest, 'Leave request updated and sent for re-approval');

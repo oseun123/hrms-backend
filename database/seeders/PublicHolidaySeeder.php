@@ -21,7 +21,7 @@ class PublicHolidaySeeder extends Seeder
      */
     public function run(): void
     {
-        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         // Define 2025 public holidays
         $holidays = [

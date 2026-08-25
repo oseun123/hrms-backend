@@ -61,13 +61,17 @@ class EmployeeNumberFormatController extends Controller
                 'format_name' => 'required|string|max:255',
                 'prefix' => 'nullable|string|max:50',
                 'include_year' => 'required|boolean',
-                'year_format' => 'required_if:include_year,true|in:YYYY,YY',
+                'year_format' => 'required_if:include_year,true|nullable|in:YYYY,YY',
                 'include_month' => 'required|boolean',
-                'month_format' => 'required_if:include_month,true|in:MM,M',
+                'month_format' => 'required_if:include_month,true|nullable|in:MM,M',
                 'separator' => 'required|string|max:10',
                 'sequence_length' => 'required|integer|min:1|max:10',
                 'reset_sequence' => 'required|in:never,yearly,monthly',
             ]);
+
+            if (empty($validated['year_format'])) {
+                $validated['year_format'] = 'YYYY';
+            }
 
             $tenantId = $request->user()->tenant_id;
 
@@ -110,12 +114,16 @@ class EmployeeNumberFormatController extends Controller
             $validated = $request->validate([
                 'prefix' => 'nullable|string|max:50',
                 'include_year' => 'required|boolean',
-                'year_format' => 'required_if:include_year,true|in:YYYY,YY',
+                'year_format' => 'required_if:include_year,true|nullable|in:YYYY,YY',
                 'include_month' => 'required|boolean',
-                'month_format' => 'required_if:include_month,true|in:MM,M',
+                'month_format' => 'required_if:include_month,true|nullable|in:MM,M',
                 'separator' => 'required|string|max:10',
                 'sequence_length' => 'required|integer|min:1|max:10',
             ]);
+
+            if (empty($validated['year_format'])) {
+                $validated['year_format'] = 'YYYY';
+            }
 
             $tenantId = $request->user()->tenant_id;
             $preview = $this->employeeNumberService->previewFormat($tenantId, $validated);

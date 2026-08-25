@@ -69,6 +69,9 @@ Route::middleware(['auth:sanctum', 'track.first.login'])->group(function () {
     // Request Module routes
     require __DIR__ . '/requests.php';
 
+    // Attendance Module routes
+    require __DIR__ . '/attendance.php';
+
     /*
     // Approval routes - Will be enabled after creating ApprovalController
     Route::prefix('approvals')->group(function () {

@@ -71,6 +71,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'Requests: Approvals', 'slug' => 'requests.approvals'],
             ['name' => 'Requests: Configuration', 'slug' => 'requests.configuration'],
             ['name' => 'Requests: Reports', 'slug' => 'requests.reports'],
+
+            // Attendance Management
+            ['name' => 'Attendance Management', 'slug' => 'attendance'],
+            ['name' => 'Attendance: Dashboard', 'slug' => 'attendance.dashboard'],
+            ['name' => 'Attendance: Approvals Queue', 'slug' => 'attendance.approval_queue'],
+            ['name' => 'Attendance: Configuration', 'slug' => 'attendance.configuration'],
+            ['name' => 'Attendance: Logs', 'slug' => 'attendance.logs'],
+            ['name' => 'Attendance: Reports', 'slug' => 'attendance.reports'],
         ];
 
         foreach ($permissions as $permission) {
@@ -118,6 +126,9 @@ class PermissionSeeder extends Seeder
             'performance.my_deliverables',
             'requests.dashboard',
             'requests.templates',
+            'attendance',
+            'attendance.dashboard',
+            'attendance.logs',
         ])->get();
 
         $employeeRole->permissions()->sync($employeePermissions);

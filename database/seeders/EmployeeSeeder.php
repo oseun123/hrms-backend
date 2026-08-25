@@ -18,6 +18,7 @@ class EmployeeSeeder extends Seeder
         $employeeUser = User::where('email', 'john.doe@hrms.local')->first();
         $devDept = Department::where('code', 'IT-DEV')->first();
         $devPosition = Position::where('code', 'DEV-001')->first();
+        $defaultBranch = DB::table('branches')->where('tenant_id', $tenantId)->where('is_default', true)->first();
 
         // Create Employee
         $employee = Employee::create([
@@ -41,6 +42,7 @@ class EmployeeSeeder extends Seeder
             'employee_id' => $employee->id,
             'work_email' => 'john.doe@hrms.local',
             'department_id' => $devDept->id,
+            'branch_id' => $defaultBranch?->id,
             'position_id' => $devPosition->id,
             'employment_type' => 'full-time',
             'employment_status' => 'active',

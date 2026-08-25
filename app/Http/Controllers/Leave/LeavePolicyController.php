@@ -17,7 +17,7 @@ class LeavePolicyController extends Controller
     {
         try {
             $tenantId = Auth::user()->tenant_id;
-            $query = LeavePolicy::with(['leaveType', 'leaveGroup'])
+            $query = LeavePolicy::with(['leaveType', 'leaveGroup', 'workflow'])
                 ->where('tenant_id', $tenantId)
                 ->whereHas('leaveGroup'); // Ensure group still exists
 

@@ -76,18 +76,38 @@ class TenantProvisioningService
             ]);
 
             // 8. Create Employment Details
-            \App\Models\Hris\EmployeeEmploymentDetail::withoutEvents(function () use ($tenant, $employee, $department, $position, $data) {
+            $defaultBranch = \App\Models\Hris\Branch::where('tenant_id', $tenant->id)->where('is_default', true)->first();
+            $defaultLeaveGroup = \App\Models\Leave\LeaveGroup::where('tenant_id', $tenant->id)->first();
+
+            \App\Models\Hris\EmployeeEmploymentDetail::withoutEvents(function () use ($tenant, $employee, $department, $position, $defaultBranch, $defaultLeaveGroup, $data) {
                 return \App\Models\Hris\EmployeeEmploymentDetail::create([
                     'tenant_id' => $tenant->id,
                     'employee_id' => $employee->id,
                     'department_id' => $department?->id,
+                    'branch_id' => $defaultBranch?->id,
                     'position_id' => $position?->id,
+                    'leave_group_id' => $defaultLeaveGroup?->id,
                     'work_email' => $data['admin_email'],
                     'employment_type' => 'full-time',
                     'employment_status' => 'active',
                     'hire_date' => now()->format('Y-m-d'),
                 ]);
             });
+
+            // Seed initial LeaveYearEndProcessing record for the previous year to make current year active
+            $leaveYearService = app(\App\Services\LeaveYearService::class);
+            $currentYear = $leaveYearService->getCurrentLeaveYear($tenant->id);
+            $previousYear = $currentYear - 1;
+
+            \App\Models\Leave\LeaveYearEndProcessing::create([
+                'tenant_id' => $tenant->id,
+                'from_year' => $previousYear,
+                'to_year' => $currentYear,
+                'processed_at' => now(),
+                'processed_by' => $user->id,
+                'employees_processed' => 1,
+                'summary' => ['provisioned' => true],
+            ]);
 
             return [
                 'tenant' => $tenant,
@@ -114,11 +134,13 @@ class TenantProvisioningService
     {
         // 1. Preferences & Security
         (new \Database\Seeders\DefaultPreferencesSeeder($tenant))->run();
+        (new \Database\Seeders\ProfileApprovalSettingsSeeder($tenant))->run();
         (new \Database\Seeders\DefaultSecurityPoliciesSeeder($tenant))->run();
         (new \Database\Seeders\EmployeeNumberFormatSeeder($tenant))->run();
 
         // 2. HR Infrastructure (Order matters for foreign keys)
         (new \Database\Seeders\DepartmentSeeder($tenant, $adminUser))->run();
+        (new \Database\Seeders\BranchSeeder($tenant, $adminUser))->run();
         (new \Database\Seeders\LevelSeeder($tenant, $adminUser))->run();
         (new \Database\Seeders\GradeSeeder($tenant, $adminUser))->run();
         (new \Database\Seeders\PositionSeeder($tenant, $adminUser))->run();
@@ -135,5 +157,6 @@ class TenantProvisioningService
         (new \Database\Seeders\PayrollSeeder($tenant))->run();
         (new \Database\Seeders\LeaveWorkflowSeeder($tenant))->run();
         (new \Database\Seeders\LeavePolicySeeder($tenant))->run();
+        (new \Database\Seeders\AttendanceDefaultsSeeder($tenant))->run();
     }
 }

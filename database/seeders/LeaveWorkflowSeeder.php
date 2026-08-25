@@ -21,7 +21,7 @@ class LeaveWorkflowSeeder extends Seeder
      */
     public function run(): void
     {
-        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             // 1. Create the default "Manual (Legacy)" workflow

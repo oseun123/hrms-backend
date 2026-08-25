@@ -37,6 +37,9 @@ Route::prefix('hris')->group(function () {
     // Positions
     Route::apiResource('positions', App\Http\Controllers\HRIS\PositionController::class);
 
+    // Branches
+    Route::apiResource('branches', App\Http\Controllers\HRIS\BranchController::class);
+
     // Bulk Employees
     Route::prefix('employees-bulk')->group(function () {
         Route::get('/template', [\App\Http\Controllers\HRIS\BulkEmployeeController::class, 'downloadTemplate']);

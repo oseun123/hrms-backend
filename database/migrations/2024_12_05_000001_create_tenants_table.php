@@ -22,16 +22,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-
-        // Seed a default tenant for existing data
-        DB::table('tenants')->insert([
-            'id' => 1,
-            'name' => 'Default Tenant',
-            'slug' => 'default',
-            'is_active' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**

@@ -8,6 +8,13 @@ use Illuminate\Database\Seeder;
 
 class ProfileApprovalSettingsSeeder extends Seeder
 {
+    protected ?Tenant $tenant = null;
+
+    public function __construct(?Tenant $tenant = null)
+    {
+        $this->tenant = $tenant;
+    }
+
     /**
      * Run the database seeds.
      */
@@ -29,7 +36,7 @@ class ProfileApprovalSettingsSeeder extends Seeder
         ];
 
         // Get all tenants
-        $tenants = Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             foreach ($sections as $section) {

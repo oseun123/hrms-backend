@@ -22,7 +22,7 @@ class PerformanceDefaultsSeeder extends Seeder
      */
     public function run(): void
     {
-        $tenants = $this->tenant ? collect([$this->tenant]) : Tenant::all();
+        $tenants = ($this->tenant && $this->tenant->exists) ? collect([$this->tenant]) : Tenant::all();
 
         foreach ($tenants as $tenant) {
             // Seed default performance settings
