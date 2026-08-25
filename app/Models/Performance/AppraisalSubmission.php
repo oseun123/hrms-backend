@@ -26,6 +26,8 @@ class AppraisalSubmission extends BaseModel
         'competency_weight',
         'final_score_level',
         'enforce_submit_back',
+        'deliverables_snapshot',
+        'competencies_snapshot',
     ];
 
     protected $casts = [
@@ -38,6 +40,8 @@ class AppraisalSubmission extends BaseModel
         'competency_weight' => 'decimal:2',
         'final_score_level' => 'integer',
         'enforce_submit_back' => 'boolean',
+        'deliverables_snapshot' => 'array',
+        'competencies_snapshot' => 'array',
     ];
 
     // Relationships

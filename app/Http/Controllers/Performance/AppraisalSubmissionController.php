@@ -62,16 +62,24 @@ class AppraisalSubmissionController extends Controller
                 ])
                 ->findOrFail($id);
 
-            // Get employee's deliverables and competencies for scoring
-            $deliverables = EmployeeDeliverable::where('employee_id', $submission->employee_id)
-                ->where('tenant_id', $tenantId)
-                ->where('is_active', true)
-                ->with(['goal', 'details.measureTarget'])
-                ->get();
+            // Get employee's deliverables and competencies (use frozen snapshot if available)
+            if (!empty($submission->deliverables_snapshot)) {
+                $deliverables = $submission->deliverables_snapshot;
+            } else {
+                $deliverables = EmployeeDeliverable::where('employee_id', $submission->employee_id)
+                    ->where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->with(['goal', 'details.measureTarget'])
+                    ->get();
+            }
 
-            $competencies = Competency::where('tenant_id', $tenantId)
-                ->where('is_active', true)
-                ->get();
+            if (!empty($submission->competencies_snapshot)) {
+                $competencies = $submission->competencies_snapshot;
+            } else {
+                $competencies = Competency::where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->get();
+            }
 
             // Determine if current user is authorized to edit/review
             $userId = Auth::id();
@@ -214,8 +222,24 @@ class AppraisalSubmissionController extends Controller
             // Calculate aggregates
             $this->scoringService->updateLevelScoreAggregates($levelScore->id, $tenantId);
 
-            // Update submission status
-            $submission->update(['status' => 'in_progress']);
+            // Update submission status and freeze snapshot of deliverables/competencies if not already captured
+            $updateData = ['status' => 'in_progress'];
+            if (empty($submission->deliverables_snapshot)) {
+                $activeDeliverables = EmployeeDeliverable::where('employee_id', $submission->employee_id)
+                    ->where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->with(['goal', 'details.measureTarget'])
+                    ->get();
+                $updateData['deliverables_snapshot'] = $activeDeliverables->toArray();
+            }
+            if (empty($submission->competencies_snapshot)) {
+                $activeCompetencies = Competency::where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->get();
+                $updateData['competencies_snapshot'] = $activeCompetencies->toArray();
+            }
+
+            $submission->update($updateData);
 
             DB::commit();
 
@@ -238,24 +262,40 @@ class AppraisalSubmissionController extends Controller
             $tenantId = Auth::user()->tenant_id;
             $submission = AppraisalSubmission::where('tenant_id', $tenantId)->findOrFail($id);
 
-            // Check if current level has been scored
-            $levelScore = AppraisalLevelScore::where('submission_id', $submission->id)
-                ->where('reviewer_level', $submission->current_level)
-                ->whereNotNull('submitted_at')
-                ->first();
+            $result = $this->workflowService->forwardToNextLevel($submission);
 
-            if (!$levelScore) {
-                return ApiResponse::error('Must submit scores before forwarding', 422);
+            if ($result['success']) {
+                return ApiResponse::success($result['submission'], $result['message']);
+            } else {
+                return ApiResponse::error($result['message'], 422);
             }
-
-            $this->workflowService->submitToNextLevel($submission);
-
-            return ApiResponse::success(
-                $submission->fresh(),
-                'Appraisal forwarded successfully'
-            );
         } catch (\Exception $e) {
             return $this->handleException($e, 'forwarding submission');
+        }
+    }
+
+    /**
+     * Submit score back to previous level
+     */
+    public function submitBack(Request $request, $id)
+    {
+        try {
+            $tenantId = Auth::user()->tenant_id;
+            $submission = AppraisalSubmission::where('tenant_id', $tenantId)->findOrFail($id);
+
+            $validated = $request->validate([
+                'reason' => 'required|string|max:500',
+            ]);
+
+            $result = $this->workflowService->submitBackToPreviousLevel($submission, $validated['reason']);
+
+            if ($result['success']) {
+                return ApiResponse::success($result['submission'], $result['message']);
+            } else {
+                return ApiResponse::error($result['message'], 422);
+            }
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'submitting back');
         }
     }
 
@@ -317,12 +357,14 @@ class AppraisalSubmissionController extends Controller
                 $attachment->delete();
             }
 
-            // Reset submission to initial state
+            // Reset submission to initial state (unfreeze snapshots)
             $submission->update([
                 'current_level' => 1,
                 'status' => 'pending',
                 'submitted_at' => null,
                 'completed_at' => null,
+                'deliverables_snapshot' => null,
+                'competencies_snapshot' => null,
             ]);
 
             return ApiResponse::success(
@@ -392,12 +434,14 @@ class AppraisalSubmissionController extends Controller
                         $attachment->delete();
                     }
 
-                    // Reset submission to initial state
+                    // Reset submission to initial state (unfreeze snapshots)
                     $submission->update([
                         'current_level' => 1,
                         'status' => 'pending',
                         'submitted_at' => null,
                         'completed_at' => null,
+                        'deliverables_snapshot' => null,
+                        'competencies_snapshot' => null,
                     ]);
 
                     $restarted++;

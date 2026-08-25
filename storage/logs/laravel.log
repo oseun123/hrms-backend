@@ -2027,3 +2027,678 @@ into your web browser: <span class="break-all" style="box-sizing: border-box; fo
 </html>
 --YXWvLPkF--
   
+[2026-08-25 15:41:32] local.DEBUG: From: test <noreply@hrms.local>
+To: oseun04+1@gmail.com
+Subject: Welcome to test
+MIME-Version: 1.0
+Date: Tue, 25 Aug 2026 15:41:31 +0000
+Message-ID: <50dd4a9788607b626c5c6a87455844d5@hrms.local>
+Content-Type: multipart/alternative; boundary=Vd2DorhH
+
+--Vd2DorhH
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+test: http://test.localhost:3000
+
+# Hello BOLANLE ELIZABETH OLUJIMI!
+
+Welcome to test! Your employee account has been created.
+
+**Employee Number:** Tet-0001
+
+**Email:** oseun04+1@gmail.com
+
+To access your account, please set your password using the "Forgot Password" feature on the login page.
+
+Simply click the link below, then use the "Forgot Password" link to receive a password reset email.
+
+Go to Login Page: http://test.localhost:3000/login
+
+Or visit: http://test.localhost:3000/forgot-password
+
+If you have any questions, please contact our support team.
+
+Regards, test
+
+If you're having trouble clicking the "Go to Login Page" button, copy and paste the URL below
+into your web browser: [http://test.localhost:3000/login](http://test.localhost:3000/login)
+
+© 2026 test. All rights reserved.
+
+--Vd2DorhH
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FlowDeskHr</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<style>
+@media only screen and (max-width: 600px) {
+.inner-body {
+width: 100% !important;
+}
+
+.footer {
+width: 100% !important;
+}
+}
+
+@media only screen and (max-width: 500px) {
+.button {
+width: 100% !important;
+}
+}
+</style>
+
+</head>
+<body style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
+
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; margin: 0; padding: 0; width: 100%;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 0; padding: 0; width: 100%;">
+<tr>
+    <td class="header" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-align: center;">
+        <a href="http://test.localhost:3000" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none; display: inline-block;">
+                        test
+                    </a>
+    </td>
+</tr>
+
+<!-- Email Body -->
+<tr>
+<td class="body" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; border-bottom: 1px solid #edf2f7; border-top: 1px solid #edf2f7; margin: 0; padding: 0; width: 100%; border: hidden !important;">
+<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; background-color: #ffffff; border-color: #e8e5ef; border-radius: 2px; border-width: 1px; box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015); margin: 0 auto; padding: 0; width: 570px;">
+<!-- Body content -->
+<tr>
+<td class="content-cell" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<h1 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 18px; font-weight: bold; margin-top: 0; text-align: left;">Hello BOLANLE ELIZABETH OLUJIMI!</h1>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Welcome to test! Your employee account has been created.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">Employee Number:</strong> Tet-0001</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">Email:</strong> oseun04+1@gmail.com</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">To access your account, please set your password using the "Forgot Password" feature on the login page.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Simply click the link below, then use the "Forgot Password" link to receive a password reset email.</p>
+<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 30px auto; padding: 0; text-align: center; width: 100%; float: unset;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<a href="http://test.localhost:3000/login" class="button button-primary" target="_blank" rel="noopener" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; border-radius: 4px; color: #fff; display: inline-block; overflow: hidden; text-decoration: none; background-color: #2d3748; border-bottom: 8px solid #2d3748; border-left: 18px solid #2d3748; border-right: 18px solid #2d3748; border-top: 8px solid #2d3748; word-break: break-all;">Go to Login Page</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Or visit: http://test.localhost:3000/forgot-password</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">If you have any questions, please contact our support team.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Regards, test</p>
+
+
+<table class="subcopy" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; border-top: 1px solid #e8e5ef; margin-top: 25px; padding-top: 25px;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 14px;">If you're having trouble clicking the "Go to Login Page" button, copy and paste the URL below
+into your web browser: <span class="break-all" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; word-break: break-all;"><a href="http://test.localhost:3000/login" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3869d4; word-break: break-all;">http://test.localhost:3000/login</a></span></p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">
+<tr>
+<td class="content-cell" align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; color: #b0adc5; font-size: 12px; text-align: center;">© 2026 test. All rights reserved.</p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+--Vd2DorhH--
+  
+[2026-08-25 16:02:43] local.ERROR: creating appraisal failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1-second-half 2026 bi-annual Review-2026' for key 'appraisals.appraisals_tenant_id_name_year_unique' (Connection: mysql, SQL: insert into `appraisals` (`name`, `year`, `review_period`, `start_date`, `end_date`, `tenant_id`, `status`, `created_by`, `updated_at`, `created_at`) values (second-half 2026 bi-annual Review, 2026, bi-annual, 2026-07-01 00:00:00, 2026-12-31 00:00:00, 1, inactive, 1, 2026-08-25 16:02:43, 2026-08-25 16:02:43)) {"exception":"Illuminate\\Database\\UniqueConstraintViolationException","file":"C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":820,"trace":"#0 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(779): Illuminate\\Database\\Connection->runQueryCallback('insert into `ap...', Array, Object(Closure))
+#1 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `ap...', Array, Object(Closure))
+#2 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Processors\\MySqlProcessor.php(35): Illuminate\\Database\\MySqlConnection->insert('insert into `ap...', Array, 'id')
+#3 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3766): Illuminate\\Database\\Query\\Processors\\MySqlProcessor->processInsertGetId(Object(Illuminate\\Database\\Query\\Builder), 'insert into `ap...', Array, 'id')
+#4 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(2120): Illuminate\\Database\\Query\\Builder->insertGetId(Array, 'id')
+#5 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1359): Illuminate\\Database\\Eloquent\\Builder->__call('insertGetId', Array)
+#6 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1324): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(Illuminate\\Database\\Eloquent\\Builder), Array)
+#7 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1163): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(Illuminate\\Database\\Eloquent\\Builder))
+#8 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1128): Illuminate\\Database\\Eloquent\\Model->save()
+#9 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(399): Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}(Object(App\\Models\\Performance\\Appraisal))
+#10 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1127): tap(Object(App\\Models\\Performance\\Appraisal), Object(Closure))
+#11 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->create(Array)
+#12 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2372): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'create', Array)
+#13 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2384): Illuminate\\Database\\Eloquent\\Model->__call('create', Array)
+#14 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Controllers\\Performance\\AppraisalController.php(104): Illuminate\\Database\\Eloquent\\Model::__callStatic('create', Array)
+#15 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\Performance\\AppraisalController->store(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(44): Illuminate\\Routing\\Controller->callAction('store', Array)
+#17 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(266): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Performance\\AppraisalController), 'store')
+#18 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(212): Illuminate\\Routing\\Route->runController()
+#19 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#20 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\CheckPermission.php(32): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\CheckPermission->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'performance.app...')
+#23 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\TrackFirstLogin.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\TrackFirstLogin->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\SetRegionalPreferences.php(70): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\SetRegionalPreferences->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\InjectTenantId.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\InjectTenantId->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(51): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(64): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'sanctum')
+#33 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->Laravel\\Sanctum\\Http\\Middleware\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(25): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ExtractTokenFromQuery.php(28): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ExtractTokenFromQuery->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#42 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#44 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ForceCors.php(29): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ForceCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#63 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#65 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\server.php(19): require_once('C:\\\\Users\\\\HP\\\\One...')
+#67 {main}"} 
+[2026-08-25 16:02:51] local.ERROR: creating appraisal failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1-second-half 2026 bi-annual Review-2026' for key 'appraisals.appraisals_tenant_id_name_year_unique' (Connection: mysql, SQL: insert into `appraisals` (`name`, `year`, `review_period`, `start_date`, `end_date`, `tenant_id`, `status`, `created_by`, `updated_at`, `created_at`) values (second-half 2026 bi-annual Review, 2026, bi-annual, 2026-07-01 00:00:00, 2026-12-31 00:00:00, 1, inactive, 1, 2026-08-25 16:02:51, 2026-08-25 16:02:51)) {"exception":"Illuminate\\Database\\UniqueConstraintViolationException","file":"C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":820,"trace":"#0 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(779): Illuminate\\Database\\Connection->runQueryCallback('insert into `ap...', Array, Object(Closure))
+#1 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `ap...', Array, Object(Closure))
+#2 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Processors\\MySqlProcessor.php(35): Illuminate\\Database\\MySqlConnection->insert('insert into `ap...', Array, 'id')
+#3 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3766): Illuminate\\Database\\Query\\Processors\\MySqlProcessor->processInsertGetId(Object(Illuminate\\Database\\Query\\Builder), 'insert into `ap...', Array, 'id')
+#4 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(2120): Illuminate\\Database\\Query\\Builder->insertGetId(Array, 'id')
+#5 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1359): Illuminate\\Database\\Eloquent\\Builder->__call('insertGetId', Array)
+#6 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1324): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(Illuminate\\Database\\Eloquent\\Builder), Array)
+#7 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1163): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(Illuminate\\Database\\Eloquent\\Builder))
+#8 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1128): Illuminate\\Database\\Eloquent\\Model->save()
+#9 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(399): Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}(Object(App\\Models\\Performance\\Appraisal))
+#10 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1127): tap(Object(App\\Models\\Performance\\Appraisal), Object(Closure))
+#11 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->create(Array)
+#12 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2372): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'create', Array)
+#13 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2384): Illuminate\\Database\\Eloquent\\Model->__call('create', Array)
+#14 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Controllers\\Performance\\AppraisalController.php(104): Illuminate\\Database\\Eloquent\\Model::__callStatic('create', Array)
+#15 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\Performance\\AppraisalController->store(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(44): Illuminate\\Routing\\Controller->callAction('store', Array)
+#17 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(266): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Performance\\AppraisalController), 'store')
+#18 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(212): Illuminate\\Routing\\Route->runController()
+#19 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#20 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\CheckPermission.php(32): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\CheckPermission->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'performance.app...')
+#23 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\TrackFirstLogin.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\TrackFirstLogin->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\SetRegionalPreferences.php(70): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\SetRegionalPreferences->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\InjectTenantId.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\InjectTenantId->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(51): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(64): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'sanctum')
+#33 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->Laravel\\Sanctum\\Http\\Middleware\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(25): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ExtractTokenFromQuery.php(28): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ExtractTokenFromQuery->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#42 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#44 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ForceCors.php(29): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ForceCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#63 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#65 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\server.php(19): require_once('C:\\\\Users\\\\HP\\\\One...')
+#67 {main}"} 
+[2026-08-25 16:03:55] local.ERROR: creating appraisal failed: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '1-second-half 2026 bi-annual Review-2026' for key 'appraisals.appraisals_tenant_id_name_year_unique' (Connection: mysql, SQL: insert into `appraisals` (`name`, `year`, `review_period`, `start_date`, `end_date`, `tenant_id`, `status`, `created_by`, `updated_at`, `created_at`) values (second-half 2026 bi-annual Review, 2026, bi-annual, 2026-07-01 00:00:00, 2026-12-31 00:00:00, 1, inactive, 1, 2026-08-25 16:03:55, 2026-08-25 16:03:55)) {"exception":"Illuminate\\Database\\UniqueConstraintViolationException","file":"C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php","line":820,"trace":"#0 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(779): Illuminate\\Database\\Connection->runQueryCallback('insert into `ap...', Array, Object(Closure))
+#1 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\MySqlConnection.php(42): Illuminate\\Database\\Connection->run('insert into `ap...', Array, Object(Closure))
+#2 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Processors\\MySqlProcessor.php(35): Illuminate\\Database\\MySqlConnection->insert('insert into `ap...', Array, 'id')
+#3 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3766): Illuminate\\Database\\Query\\Processors\\MySqlProcessor->processInsertGetId(Object(Illuminate\\Database\\Query\\Builder), 'insert into `ap...', Array, 'id')
+#4 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(2120): Illuminate\\Database\\Query\\Builder->insertGetId(Array, 'id')
+#5 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1359): Illuminate\\Database\\Eloquent\\Builder->__call('insertGetId', Array)
+#6 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1324): Illuminate\\Database\\Eloquent\\Model->insertAndSetId(Object(Illuminate\\Database\\Eloquent\\Builder), Array)
+#7 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(1163): Illuminate\\Database\\Eloquent\\Model->performInsert(Object(Illuminate\\Database\\Eloquent\\Builder))
+#8 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1128): Illuminate\\Database\\Eloquent\\Model->save()
+#9 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\helpers.php(399): Illuminate\\Database\\Eloquent\\Builder->Illuminate\\Database\\Eloquent\\{closure}(Object(App\\Models\\Performance\\Appraisal))
+#10 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1127): tap(Object(App\\Models\\Performance\\Appraisal), Object(Closure))
+#11 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->create(Array)
+#12 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2372): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'create', Array)
+#13 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2384): Illuminate\\Database\\Eloquent\\Model->__call('create', Array)
+#14 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Controllers\\Performance\\AppraisalController.php(104): Illuminate\\Database\\Eloquent\\Model::__callStatic('create', Array)
+#15 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Controller.php(54): App\\Http\\Controllers\\Performance\\AppraisalController->store(Object(Illuminate\\Http\\Request))
+#16 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ControllerDispatcher.php(44): Illuminate\\Routing\\Controller->callAction('store', Array)
+#17 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(266): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(App\\Http\\Controllers\\Performance\\AppraisalController), 'store')
+#18 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(212): Illuminate\\Routing\\Route->runController()
+#19 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(808): Illuminate\\Routing\\Route->run()
+#20 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#21 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\CheckPermission.php(32): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\CheckPermission->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'performance.app...')
+#23 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\TrackFirstLogin.php(36): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\TrackFirstLogin->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\SetRegionalPreferences.php(70): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\SetRegionalPreferences->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#27 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\InjectTenantId.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#28 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\InjectTenantId->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#29 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(51): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#30 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#31 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(64): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure), 'sanctum')
+#33 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(26): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->Laravel\\Sanctum\\Http\\Middleware\\{closure}(Object(Illuminate\\Http\\Request))
+#35 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\sanctum\\src\\Http\\Middleware\\EnsureFrontendRequestsAreStateful.php(25): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#37 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#38 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ExtractTokenFromQuery.php(28): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#39 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ExtractTokenFromQuery->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#40 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#41 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(807): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#42 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#43 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(750): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#44 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#45 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(201): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#46 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#47 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#48 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#49 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#50 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#51 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#52 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#53 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#54 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#55 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#58 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#59 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\app\\Http\\Middleware\\ForceCors.php(29): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#60 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(209): App\\Http\\Middleware\\ForceCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#63 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#64 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(1220): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#65 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\public\\index.php(17): Illuminate\\Foundation\\Application->handleRequest(Object(Illuminate\\Http\\Request))
+#66 C:\\Users\\HP\\OneDrive\\Desktop\\seun\\antigravity\\hrms-backend\\server.php(19): require_once('C:\\\\Users\\\\HP\\\\One...')
+#67 {main}"} 
+[2026-08-25 16:24:42] local.DEBUG: From: test <noreply@hrms.local>
+To: oseun04+1@gmail.com
+Subject: test - Password Reset Request
+MIME-Version: 1.0
+Date: Tue, 25 Aug 2026 16:24:42 +0000
+Message-ID: <41086d7e4fb655f022cec6d242c776d7@hrms.local>
+Content-Type: multipart/alternative; boundary=4e7Lv6CR
+
+--4e7Lv6CR
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+test: http://test.localhost:3000
+
+# Hello BOLANLE ELIZABETH OLUJIMI!
+
+You requested a password reset for your account.
+
+Click the button below to reset your password:
+
+Reset Password: http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com
+
+This link will expire in 1 hour.
+
+If you did not request this reset, please ignore this email.
+
+Regards, test
+
+If you're having trouble clicking the "Reset Password" button, copy and paste the URL below
+into your web browser: [http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com](http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com)
+
+© 2026 test. All rights reserved.
+
+--4e7Lv6CR
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FlowDeskHr</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<style>
+@media only screen and (max-width: 600px) {
+.inner-body {
+width: 100% !important;
+}
+
+.footer {
+width: 100% !important;
+}
+}
+
+@media only screen and (max-width: 500px) {
+.button {
+width: 100% !important;
+}
+}
+</style>
+
+</head>
+<body style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
+
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; margin: 0; padding: 0; width: 100%;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 0; padding: 0; width: 100%;">
+<tr>
+    <td class="header" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-align: center;">
+        <a href="http://test.localhost:3000" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none; display: inline-block;">
+                        test
+                    </a>
+    </td>
+</tr>
+
+<!-- Email Body -->
+<tr>
+<td class="body" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; border-bottom: 1px solid #edf2f7; border-top: 1px solid #edf2f7; margin: 0; padding: 0; width: 100%; border: hidden !important;">
+<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; background-color: #ffffff; border-color: #e8e5ef; border-radius: 2px; border-width: 1px; box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015); margin: 0 auto; padding: 0; width: 570px;">
+<!-- Body content -->
+<tr>
+<td class="content-cell" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<h1 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 18px; font-weight: bold; margin-top: 0; text-align: left;">Hello BOLANLE ELIZABETH OLUJIMI!</h1>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">You requested a password reset for your account.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Click the button below to reset your password:</p>
+<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 30px auto; padding: 0; text-align: center; width: 100%; float: unset;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<a href="http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com" class="button button-primary" target="_blank" rel="noopener" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; border-radius: 4px; color: #fff; display: inline-block; overflow: hidden; text-decoration: none; background-color: #2d3748; border-bottom: 8px solid #2d3748; border-left: 18px solid #2d3748; border-right: 18px solid #2d3748; border-top: 8px solid #2d3748; word-break: break-all;">Reset Password</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">This link will expire in 1 hour.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">If you did not request this reset, please ignore this email.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Regards, test</p>
+
+
+<table class="subcopy" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; border-top: 1px solid #e8e5ef; margin-top: 25px; padding-top: 25px;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 14px;">If you're having trouble clicking the "Reset Password" button, copy and paste the URL below
+into your web browser: <span class="break-all" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; word-break: break-all;"><a href="http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3869d4; word-break: break-all;">http://test.localhost:3000/reset-password/fRWt2SVOBGPnjP8tTkRrPvZczOwDlntK88gb7YUYX8PvrGtBzoP65rwBmlFH6VyM?email=oseun04%2B1%40gmail.com</a></span></p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">
+<tr>
+<td class="content-cell" align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; color: #b0adc5; font-size: 12px; text-align: center;">© 2026 test. All rights reserved.</p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+--4e7Lv6CR--
+  
+[2026-08-25 16:26:21] local.DEBUG: From: test <noreply@hrms.local>
+To: oseun04+1@gmail.com
+Subject: New Device Login Alert - test
+MIME-Version: 1.0
+Date: Tue, 25 Aug 2026 16:26:21 +0000
+Message-ID: <c015ac0225103dfcfb52e157bcedc736@hrms.local>
+Content-Type: multipart/alternative; boundary=ghdVgjVd
+
+--ghdVgjVd
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+test: http://test.localhost:3000
+
+# Hello BOLANLE ELIZABETH OLUJIMI!
+
+Your account was just logged into from a new device.
+
+**Device:** Edge on Windows
+
+**IP Address:** 127.0.0.1
+
+**Date & Time:** August 25, 2026, 4:26 pm
+
+If this was you, you can safely ignore this email.
+
+**If this was NOT you**, please take the following actions immediately:
+
+1. Change your password to secure your account.
+
+2. Review your active sessions and revoke any unrecognized devices.
+
+View Active Sessions: http://test.localhost:3000/preferences
+
+For added security, we recommend enabling Two-Factor Authentication (2FA) if you haven't already.
+
+Regards, test
+
+If you're having trouble clicking the "View Active Sessions" button, copy and paste the URL below
+into your web browser: [http://test.localhost:3000/preferences](http://test.localhost:3000/preferences)
+
+© 2026 test. All rights reserved.
+
+--ghdVgjVd
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FlowDeskHr</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<style>
+@media only screen and (max-width: 600px) {
+.inner-body {
+width: 100% !important;
+}
+
+.footer {
+width: 100% !important;
+}
+}
+
+@media only screen and (max-width: 500px) {
+.button {
+width: 100% !important;
+}
+}
+</style>
+
+</head>
+<body style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
+
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; margin: 0; padding: 0; width: 100%;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 0; padding: 0; width: 100%;">
+<tr>
+    <td class="header" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; padding: 25px 0; text-align: center;">
+        <a href="http://test.localhost:3000" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 19px; font-weight: bold; text-decoration: none; display: inline-block;">
+                        test
+                    </a>
+    </td>
+</tr>
+
+<!-- Email Body -->
+<tr>
+<td class="body" width="100%" cellpadding="0" cellspacing="0" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; border-bottom: 1px solid #edf2f7; border-top: 1px solid #edf2f7; margin: 0; padding: 0; width: 100%; border: hidden !important;">
+<table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; background-color: #ffffff; border-color: #e8e5ef; border-radius: 2px; border-width: 1px; box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015); margin: 0 auto; padding: 0; width: 570px;">
+<!-- Body content -->
+<tr>
+<td class="content-cell" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<h1 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3d4852; font-size: 18px; font-weight: bold; margin-top: 0; text-align: left;">Hello BOLANLE ELIZABETH OLUJIMI!</h1>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Your account was just logged into from a new device.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">Device:</strong> Edge on Windows</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">IP Address:</strong> 127.0.0.1</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">Date &amp; Time:</strong> August 25, 2026, 4:26 pm</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">If this was you, you can safely ignore this email.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;"><strong style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">If this was NOT you</strong>, please take the following actions immediately:</p>
+<ol style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.4; text-align: left;">
+<li style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Change your password to secure your account.</p>
+</li>
+<li style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Review your active sessions and revoke any unrecognized devices.</p>
+</li>
+</ol>
+<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 30px auto; padding: 0; text-align: center; width: 100%; float: unset;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<a href="http://test.localhost:3000/preferences" class="button button-primary" target="_blank" rel="noopener" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -webkit-text-size-adjust: none; border-radius: 4px; color: #fff; display: inline-block; overflow: hidden; text-decoration: none; background-color: #2d3748; border-bottom: 8px solid #2d3748; border-left: 18px solid #2d3748; border-right: 18px solid #2d3748; border-top: 8px solid #2d3748; word-break: break-all;">View Active Sessions</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">For added security, we recommend enabling Two-Factor Authentication (2FA) if you haven't already.</p>
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Regards, test</p>
+
+
+<table class="subcopy" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; border-top: 1px solid #e8e5ef; margin-top: 25px; padding-top: 25px;">
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 14px;">If you're having trouble clicking the "View Active Sessions" button, copy and paste the URL below
+into your web browser: <span class="break-all" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; word-break: break-all;"><a href="http://test.localhost:3000/preferences" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3869d4; word-break: break-all;">http://test.localhost:3000/preferences</a></span></p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative;">
+<table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">
+<tr>
+<td class="content-cell" align="center" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; max-width: 100vw; padding: 32px;">
+<p style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; line-height: 1.5em; margin-top: 0; color: #b0adc5; font-size: 12px; text-align: center;">© 2026 test. All rights reserved.</p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>
+--ghdVgjVd--
+  

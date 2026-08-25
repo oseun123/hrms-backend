@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class AppraisalController extends Controller
 {
@@ -33,36 +34,25 @@ class AppraisalController extends Controller
         try {
             $tenantId = Auth::user()->tenant_id;
             $query = Appraisal::where('tenant_id', $tenantId)
-                ->with(['creator']);
+                ->with(['submissions.employee', 'creator']);
 
-            // Filtering
-            if ($request->has('year')) {
+            if ($request->has('year') && !empty($request->year)) {
                 $query->where('year', $request->year);
             }
 
-            if ($request->has('status') && $request->status !== 'all') {
-                $status = $request->status;
-                if (str_contains($status, ',')) {
-                    $statuses = explode(',', $status);
-                    $query->whereIn('status', $statuses);
-                } else {
-                    $query->where('status', $status);
-                }
+            if ($request->has('status') && !empty($request->status) && $request->status !== 'all') {
+                $query->where('status', $request->status);
             }
 
-            if ($request->has('name')) {
-                $query->where('name', 'like', '%' . $request->name . '%');
+            if ($request->has('name') && !empty($request->name)) {
+                $query->where('name', 'like', "%{$request->name}%");
             }
 
-            // Ordering
-            $query->orderBy('created_at', 'desc');
-
-            // Pagination
             $perPage = $request->get('per_page', 10);
-            $appraisals = $query->paginate($perPage);
+            $appraisals = $query->orderBy('created_at', 'desc')->paginate($perPage);
 
             return ApiResponse::success($appraisals);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->handleException($e, 'fetching appraisals');
         }
     }
@@ -73,23 +63,36 @@ class AppraisalController extends Controller
             $tenantId = Auth::user()->tenant_id;
             $userId = Auth::id();
 
+            // Purge any soft-deleted appraisals with this name and year first
+            if ($request->has('name') && $request->has('year')) {
+                Appraisal::where('tenant_id', $tenantId)
+                    ->where('name', $request->name)
+                    ->where('year', $request->year)
+                    ->onlyTrashed()
+                    ->forceDelete();
+            }
+
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('appraisals')->where(function ($query) use ($tenantId, $request) {
+                        return $query->where('tenant_id', $tenantId)
+                            ->where('year', $request->year)
+                            ->whereNull('deleted_at');
+                    }),
+                ],
                 'year' => 'required|integer|min:2020|max:2100',
                 'review_period' => 'required|string|max:50',
                 'start_date' => 'nullable|date',
                 'end_date' => 'nullable|date|after_or_equal:start_date',
                 'description' => 'nullable|string',
+            ], [
+                'name.unique' => "An active or draft appraisal with the name '{$request->name}' already exists for year {$request->year}."
             ]);
 
-            // Handle soft-deleted duplicates that would violate the unique index
-            Appraisal::where('tenant_id', $tenantId)
-                ->where('name', $validated['name'])
-                ->where('year', $validated['year'])
-                ->onlyTrashed()
-                ->forceDelete();
-
-            // Lock the cycle when creating the first appraisal
+            // Create or update cycle record
             PerformanceCycle::updateOrCreate(
                 [
                     'tenant_id' => $tenantId,
@@ -97,7 +100,6 @@ class AppraisalController extends Controller
                 ],
                 [
                     'cycle_type' => $request->review_period ?? 'annual',
-                    'locked_at' => now(),
                 ]
             );
 
@@ -108,7 +110,7 @@ class AppraisalController extends Controller
             ]));
 
             return ApiResponse::success($appraisal, 'Appraisal created successfully', 201);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $this->handleException($e, 'creating appraisal');
         }
     }
@@ -140,6 +142,20 @@ class AppraisalController extends Controller
                 'status' => 'in:inactive,active,completed',
             ]);
 
+            if (isset($validated['status']) && $validated['status'] === 'active' && $appraisal->status !== 'active') {
+                $existingActive = Appraisal::where('tenant_id', $tenantId)
+                    ->where('status', 'active')
+                    ->where('id', '!=', $id)
+                    ->first();
+
+                if ($existingActive) {
+                    return ApiResponse::error(
+                        "Cannot activate this appraisal because '{$existingActive->name}' is currently active. Please complete or close the active appraisal cycle first.",
+                        422
+                    );
+                }
+            }
+
             $appraisal->update($validated);
             return ApiResponse::success($appraisal, 'Appraisal updated successfully');
         } catch (\Exception $e) {
@@ -155,6 +171,19 @@ class AppraisalController extends Controller
         try {
             $tenantId = Auth::user()->tenant_id;
             $appraisal = Appraisal::where('tenant_id', $tenantId)->findOrFail($id);
+
+            // Ensure only one appraisal cycle can be active at a time
+            $existingActive = Appraisal::where('tenant_id', $tenantId)
+                ->where('status', 'active')
+                ->where('id', '!=', $id)
+                ->first();
+
+            if ($existingActive) {
+                return ApiResponse::error(
+                    "Cannot activate this appraisal because '{$existingActive->name}' is currently active. Only one appraisal cycle can be active at a time. Please complete the current active cycle first.",
+                    422
+                );
+            }
 
             DB::beginTransaction();
 
@@ -287,13 +316,11 @@ class AppraisalController extends Controller
             }
 
             // If it's active or inactive, we delete associated submissions first
-            // (Inactive appraisals might have submissions if they were previously active and then deactivated, 
-            // though the UI flow usually creates them on activation)
-            AppraisalSubmission::where('appraisal_id', $appraisal->id)->delete();
+            AppraisalSubmission::where('appraisal_id', $appraisal->id)->forceDelete();
 
-            $appraisal->delete();
+            $appraisal->forceDelete();
 
-            return ApiResponse::success(null, 'Appraisal and associated pending submissions deleted successfully');
+            return ApiResponse::success(null, 'Appraisal deleted successfully');
         });
     }
 }

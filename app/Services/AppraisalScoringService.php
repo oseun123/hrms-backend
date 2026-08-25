@@ -36,12 +36,14 @@ class AppraisalScoringService
             $weightage = $goalScore->measureTarget->weightage ?? 0;
 
             // Check if there's a custom weightage in deliverable details
-            $deliverableDetail = $goalScore->employeeDeliverable->details()
-                ->where('measure_target_id', $goalScore->measure_target_id)
-                ->first();
+            if ($goalScore->employeeDeliverable) {
+                $deliverableDetail = $goalScore->employeeDeliverable->details()
+                    ->where('measure_target_id', $goalScore->measure_target_id)
+                    ->first();
 
-            if ($deliverableDetail && $deliverableDetail->custom_weightage) {
-                $weightage = $deliverableDetail->custom_weightage;
+                if ($deliverableDetail && $deliverableDetail->custom_weightage) {
+                    $weightage = $deliverableDetail->custom_weightage;
+                }
             }
 
             $totalWeightedScore += ($goalScore->score * $weightage);

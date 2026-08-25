@@ -12,7 +12,7 @@ trait HandlesApiErrors
     /**
      * Handle common controller exceptions
      */
-    protected function handleException(\Exception $e, string $context = 'Operation')
+    protected function handleException(\Throwable $e, string $context = 'Operation')
     {
         if ($e instanceof ValidationException) {
             return ApiResponse::validationError('Validation failed', $e->errors());
@@ -30,6 +30,6 @@ trait HandlesApiErrors
             'trace' => $e->getTraceAsString(),
         ]);
 
-        return ApiResponse::serverError("{$context} failed. Please try again.");
+        return ApiResponse::serverError("{$context} failed: " . $e->getMessage());
     }
 }
