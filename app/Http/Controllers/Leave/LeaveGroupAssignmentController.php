@@ -95,6 +95,21 @@ class LeaveGroupAssignmentController extends Controller
             $employmentDetails->leave_group_id = $request->leave_group_id;
             $employmentDetails->save();
 
+            // Automatically accrue balances for the newly assigned group
+            $employee = \App\Models\Hris\Employee::find($request->employee_id);
+            if ($employee) {
+                $leaveBalanceService = app(\App\Services\Leave\LeaveBalanceService::class);
+                $leaveYearService = app(\App\Services\LeaveYearService::class);
+                $year = $leaveYearService->getCurrentLeaveYear($tenantId);
+                $policies = \App\Models\Leave\LeavePolicy::where('leave_group_id', $request->leave_group_id)
+                    ->where('is_active', true)
+                    ->get();
+
+                foreach ($policies as $policy) {
+                    $leaveBalanceService->accrue($employee, $policy, $year);
+                }
+            }
+
             return ApiResponse::success($employmentDetails, 'Leave group assigned successfully');
         } catch (\Exception $e) {
             return $this->handleException($e, 'assigning leave group');
@@ -118,12 +133,25 @@ class LeaveGroupAssignmentController extends Controller
                 return ApiResponse::validationError('Validation failed', $validator->errors());
             }
 
-            $tenantId = Auth::user()->tenant_id;
-
             $updated = EmployeeEmploymentDetail::whereHas('employee', function ($q) use ($tenantId, $request) {
                 $q->where('tenant_id', $tenantId)
                     ->whereIn('id', $request->employee_ids);
             })->update(['leave_group_id' => $request->leave_group_id]);
+
+            // Automatically accrue balances for the newly assigned group
+            $leaveBalanceService = app(\App\Services\Leave\LeaveBalanceService::class);
+            $leaveYearService = app(\App\Services\LeaveYearService::class);
+            $year = $leaveYearService->getCurrentLeaveYear($tenantId);
+            $policies = \App\Models\Leave\LeavePolicy::where('leave_group_id', $request->leave_group_id)
+                ->where('is_active', true)
+                ->get();
+            $employees = \App\Models\Hris\Employee::whereIn('id', $request->employee_ids)->get();
+
+            foreach ($employees as $employee) {
+                foreach ($policies as $policy) {
+                    $leaveBalanceService->accrue($employee, $policy, $year);
+                }
+            }
 
             return ApiResponse::success(
                 ['updated_count' => $updated],

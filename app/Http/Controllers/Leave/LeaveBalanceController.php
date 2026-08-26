@@ -9,6 +9,7 @@ use App\Models\Leave\LeavePolicy;
 use App\Models\Hris\Employee;
 use App\Services\LeaveYearService;
 use App\Traits\HandlesApiErrors;
+use App\Services\Leave\LeaveBalanceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,45 +20,68 @@ class LeaveBalanceController extends Controller
     use HandlesApiErrors;
 
     protected LeaveYearService $leaveYearService;
+    protected LeaveBalanceService $leaveBalanceService;
 
-    public function __construct(LeaveYearService $leaveYearService)
-    {
+    public function __construct(
+        LeaveYearService $leaveYearService,
+        LeaveBalanceService $leaveBalanceService
+    ) {
         $this->leaveYearService = $leaveYearService;
+        $this->leaveBalanceService = $leaveBalanceService;
     }
 
     public function index(Request $request)
     {
         try {
             $tenantId = Auth::user()->tenant_id;
-            $query = LeaveBalance::with(['leaveType', 'employee.employmentDetails.leaveGroup'])
-                ->where('tenant_id', $tenantId);
+            $year = $request->has('year') && !empty($request->year) 
+                ? (int)$request->year 
+                : (int)$this->leaveYearService->getCurrentLeaveYear($tenantId);
 
-            if ($request->has('employee_id')) {
+            if ($request->has('employee_id') && !empty($request->employee_id)) {
                 $employeeId = $request->employee_id;
-                $year = $request->has('year') ? $request->year : $this->leaveYearService->getCurrentLeaveYear($tenantId);
-
                 // Sync balances for the filtered employee
-                $this->syncBalances((int)$employeeId, (int)$year);
+                $this->syncBalances((int)$employeeId, $year);
+            } elseif ($request->has('leave_group_id') && !empty($request->leave_group_id)) {
+                $groupId = $request->leave_group_id;
+                $employeeIds = Employee::where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->whereHas('employmentDetails', function ($q) use ($groupId) {
+                        $q->where('leave_group_id', $groupId);
+                    })->pluck('id');
 
-                $query->where('employee_id', $employeeId);
+                foreach ($employeeIds as $empId) {
+                    $this->syncBalances((int)$empId, $year);
+                }
+            } else {
+                $employeeIds = Employee::where('tenant_id', $tenantId)
+                    ->where('is_active', true)
+                    ->whereHas('employmentDetails', function ($q) {
+                        $q->whereNotNull('leave_group_id');
+                    })->pluck('id');
+
+                foreach ($employeeIds as $empId) {
+                    $this->syncBalances((int)$empId, $year);
+                }
             }
 
-            if ($request->has('leave_type_id')) {
+            $query = LeaveBalance::with(['leaveType', 'employee.employmentDetails.leaveGroup'])
+                ->where('tenant_id', $tenantId)
+                ->where('year', $year);
+
+            if ($request->has('employee_id') && !empty($request->employee_id)) {
+                $query->where('employee_id', $request->employee_id);
+            }
+
+            if ($request->has('leave_type_id') && !empty($request->leave_type_id)) {
                 $query->where('leave_type_id', $request->leave_type_id);
             }
 
-            if ($request->has('leave_group_id')) {
+            if ($request->has('leave_group_id') && !empty($request->leave_group_id)) {
                 $groupId = $request->leave_group_id;
                 $query->whereHas('employee.employmentDetails', function ($q) use ($groupId) {
                     $q->where('leave_group_id', $groupId);
                 });
-            }
-
-            if ($request->has('year')) {
-                $query->where('year', $request->year);
-            } else {
-                // Use the current leave year from the service
-                $query->where('year', $this->leaveYearService->getCurrentLeaveYear($tenantId));
             }
 
             $balances = $query->get();
@@ -221,16 +245,34 @@ class LeaveBalanceController extends Controller
     }
 
     /**
-     * Synchronize leave balance pending amounts with actual requests.
+     * Synchronize leave balance pending amounts and ensure records exist from policies.
      */
     protected function syncBalances(int $employeeId, int $year)
     {
         try {
+            $employee = Employee::with('employmentDetails')->find($employeeId);
+            if (!$employee) {
+                return;
+            }
+
+            $leaveGroupId = $employee->employmentDetails?->leave_group_id;
+            if ($leaveGroupId) {
+                $policies = LeavePolicy::where('leave_group_id', $leaveGroupId)
+                    ->where('is_active', true)
+                    ->get();
+
+                foreach ($policies as $policy) {
+                    // Always re-accrue to keep entitlement in sync with current policy settings
+                    $this->leaveBalanceService->accrue($employee, $policy, $year);
+                }
+            }
+
             $balances = LeaveBalance::where('employee_id', $employeeId)
                 ->where('year', $year)
                 ->get();
 
-            $boundaries = $this->leaveYearService->getLeaveYearBoundaries($year, Auth::user()->tenant_id);
+            $tenantId = $employee->tenant_id ?? Auth::user()->tenant_id;
+            $boundaries = $this->leaveYearService->getLeaveYearBoundaries($year, $tenantId);
 
             foreach ($balances as $balance) {
                 $actualPending = \App\Models\Leave\LeaveRequest::where('employee_id', $employeeId)

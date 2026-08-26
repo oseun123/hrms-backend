@@ -75,7 +75,7 @@ class LeaveBalanceService
                 // Joiner in the current year
                 $totalDaysInYear = $hireDate->copy()->endOfYear()->dayOfYear;
                 $daysRemaining = $hireDate->diffInDays($hireDate->copy()->endOfYear()) + 1;
-                $entitlement = round(($daysRemaining / $totalDaysInYear) * $entitlement, 2);
+                $entitlement = ceil(($daysRemaining / $totalDaysInYear) * $entitlement);
             }
         }
 
