@@ -114,6 +114,10 @@ Route::prefix('hris')->group(function () {
         Route::put('/skills/{id}', [App\Http\Controllers\HRIS\EmployeeSkillController::class, 'update']);
         Route::delete('/skills/{id}', [App\Http\Controllers\HRIS\EmployeeSkillController::class, 'destroy']);
 
+        // Exit Interview
+        Route::get('/exit-interview', [App\Http\Controllers\HRIS\ExitInterviewController::class, 'show']);
+        Route::post('/exit-interview', [App\Http\Controllers\HRIS\ExitInterviewController::class, 'storeOrUpdate']);
+
         // Other routes
         Route::get('/profile-completeness', [App\Http\Controllers\HRIS\EmployeeController::class, 'profileCompleteness']);
         Route::get('/history', [App\Http\Controllers\HRIS\EmployeeController::class, 'history']);

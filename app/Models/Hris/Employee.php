@@ -176,6 +176,11 @@ class Employee extends BaseModel
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function exitInterview()
+    {
+        return $this->hasOne(EmployeeExitInterview::class);
+    }
+
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
